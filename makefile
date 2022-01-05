@@ -12,7 +12,7 @@ INC			=	-I ./include -I ./libft -I ./mlx
 
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
-SRC			=	main.c 
+SRC			=	main.c reader.c
 
 OBJ			=	$(SRC:.c=.o)
 

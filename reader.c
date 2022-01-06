@@ -59,16 +59,9 @@ void fdf_reader(t_data *data, char *file)
 	char	*line;
 	int		i;
 	int		cycle;
-	(void)cycle;
-	(void) i;
-	(void) line;
-	(void) fd;
-
 
     data->width = get_width(file);
     data->heigth = get_heigth(file);
-	printf("H - %d  W - %d\n", data->heigth, data->width);
-	
 	data->matrix = (int**)malloc(sizeof(int*) * (data->heigth + 1));
 	i = 0;
 	while(i < data->heigth)
@@ -87,5 +80,4 @@ void fdf_reader(t_data *data, char *file)
 	}
 	data->matrix[i] = NULL;
 	close(fd);
-	
 }

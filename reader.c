@@ -28,14 +28,12 @@ int	get_heigth(char *file)
 	{
 		line = get_next_line(fd);
 		if(line == NULL)
-		{
 			cycle = 0;
-			free(line);
-		}
 		heigth++;
 	}
+	free(line);
 	close(fd);
-	return (heigth);
+	return (heigth - 1);
 }
 
 void filler(int *data, char *line)
@@ -61,27 +59,33 @@ void fdf_reader(t_data *data, char *file)
 	char	*line;
 	int		i;
 	int		cycle;
+	(void)cycle;
+	(void) i;
+	(void) line;
+	(void) fd;
+
 
     data->width = get_width(file);
     data->heigth = get_heigth(file);
-	data->matrix = malloc(sizeof(int*) * data->heigth + 1);
+	printf("H - %d  W - %d\n", data->heigth, data->width);
+	
+	data->matrix = (int**)malloc(sizeof(int*) * (data->heigth + 1));
 	i = 0;
-	while(i <= data->width)
-		data->matrix[i++] = malloc(sizeof(int) * data->width + 1);
+	while(i < data->heigth)
+		data->matrix[i++] = malloc(sizeof(int) * (data->width + 1));
+		
 	fd = open(file, O_RDONLY, 0);
 	i = 0;
 	cycle = 1;
-	while(cycle)
+	line = get_next_line(fd);
+	while(line)
 	{
+		filler(data->matrix[i], line);
+		free(line);
 		line = get_next_line(fd);
-		if(line == NULL)
-			cycle = 0;
-		else
-		{
-			filler(data->matrix[i], line);
-			free(line);
-		}
+		i++;
 	}
-	close(fd);
 	data->matrix[i] = NULL;
+	close(fd);
+	
 }

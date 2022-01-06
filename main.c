@@ -18,7 +18,7 @@ int main(int argc, char **argv)
         j = 0;
         while(j < data->width)
         {
-            printf("%d ", data->matrix[i][j]);
+            printf("%3d ", data->matrix[i][j]);
             j++;
         }
         printf("\n");

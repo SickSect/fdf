@@ -5,13 +5,13 @@ int main(int argc, char **argv)
     (void)argc;
     (void)argv;
     t_data *data;
-    //int i;
-    //int j;
+    int i;
+    int j;
 
 
     data = malloc(sizeof(t_data));
     fdf_reader(data, argv[1]);
-    /*
+    
     i = 0;
     while(i < data->heigth)
     {
@@ -25,5 +25,5 @@ int main(int argc, char **argv)
         i++;
     }
     free(data);
-    */
+    
 }

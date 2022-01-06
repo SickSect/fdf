@@ -62,7 +62,7 @@ void fdf_reader(t_data *data, char *file)
 	int		i;
 	int		cycle;
 
-    data->width = get_width(file);
+    //data->width = get_width(file);
     data->heigth = get_heigth(file);
 	data->matrix = malloc(sizeof(int*) * data->heigth + 1);
 	i = 0;

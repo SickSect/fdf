@@ -15,6 +15,7 @@ typedef struct s_data
     int		**matrix;
     void	*mlx;
     void	*win;
+    int     color;
     int zoom;
 }	t_data;
 

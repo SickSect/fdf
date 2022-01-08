@@ -3,6 +3,11 @@
 #define MX(x, y) (x > y ? x : y)
 #define MD(x) ((x > 0) ? x : -x)
 
+void make_matrix(float *x, float *y, float *z)
+{
+
+}
+
 void mapper(t_data *data)
 {
     int x;

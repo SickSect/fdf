@@ -57,7 +57,6 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     tmp = MX(MD(pix_x), MD(pix_y));
     pix_x /= tmp;
     pix_y /= tmp;
-
     while((int)(x - x1) || (int)(y - y1))
     {
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);

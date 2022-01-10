@@ -24,5 +24,5 @@ typedef struct s_data
 void fdf_reader(t_data *data, char *file);
 void connecter(float x, float y, float x1, float y1, t_data *data);
 void mapper(t_data *data);
-int keyer(int key, t_data *data);
+int  keyer(int key, t_data *data);
 #endif

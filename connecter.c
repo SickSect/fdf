@@ -1,11 +1,13 @@
 #include "fdf.h"
+#include <math.h>
 
 #define MX(x, y) (x > y ? x : y)
 #define MD(x) ((x > 0) ? x : -x)
 
-void make_matrix(float *x, float *y, float *z)
+void make_matrix(float *x, float *y, float z)
 {
-
+    *x = (*x - *y) * cos(0.8);
+    *y = (*x + *y) * sin(0.8) - z;
 }
 
 void mapper(t_data *data)
@@ -36,7 +38,6 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     int tmp;
     int z;
     int z1;
-    (void)z1;
 
     z = data->matrix[(int)y][(int)x];
     z1 = data->matrix[(int)y1][(int)x1];
@@ -44,7 +45,13 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     x1 *= data->zoom;
     y *= data->zoom;
     y1 *= data->zoom;
-    data->color = (z) ? 0xe80c0c : 0xffffff;
+    data->color = (z || z1) ? 0xe80c0c : 0xffffff;
+    make_matrix(&x, &y, (float)z);
+    make_matrix(&x1, &y1, (float)z1);
+    x += data->mv_x;
+    y += data->mv_y;
+    x1 += data->mv_x;
+    y1 += data->mv_y;
     pix_x = x1 - x;
     pix_y = y1 - y;
     tmp = MX(MD(pix_x), MD(pix_y));

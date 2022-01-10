@@ -1,9 +1,21 @@
 #include "fdf.h"
 
-int keyer(int key, void *data)
+int keyer(int key, t_data *data)
 {
-    (void)data;
+    
     printf("%d", key);
+    /*
+    if(key == 126)
+        data->mv_y -= 10;
+    if (key == 125)
+        data->mv_y += 10;
+    if(key == 123)
+        data->mv_x -= 10;
+    if (key == 124)
+        data->mv_y += 10;
+    mlx_clear_window(data->mlx, data->win);
+    mapper(data);
+    */
     return (0);
 }
 
@@ -12,9 +24,6 @@ int main(int argc, char **argv)
     (void)argc;
     (void)argv;
     t_data *data;
-    //int i;
-    //int j;
-
 
     data = malloc(sizeof(t_data));
     fdf_reader(data, argv[1]);
@@ -33,10 +42,10 @@ int main(int argc, char **argv)
     }
     */
     data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, 1000, 1000, "FRCTL");
-    data->zoom = 20;
+    data->win = mlx_new_window(data->mlx, 1280, 720, "FRCTL");
+    data->zoom = 40;
     mapper(data);
-    mlx_key_hook(data->win, keyer, NULL);
+    mlx_key_hook(data->win, keyer, data);
     mlx_loop(data->mlx);
     free(data);
     

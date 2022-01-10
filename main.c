@@ -3,9 +3,15 @@
 int press(int key, t_data *data)
 {
 	printf("%d \n", key);
-    
-	(void)data;
-	return (0);
+    if(key == 65362)
+    {
+        printf("UP\n");
+        data->mv_y -= 10;
+    }
+    mlx_clear_window(data->mlx, data->win);
+    mapper(data);
+
+    return (0);
 }
 
 int main(int argc, char **argv)
@@ -14,6 +20,8 @@ int main(int argc, char **argv)
     t_data *data;
 
     data = malloc(sizeof(t_data));
+    data->mv_x = 350;
+    data->mv_y = 350;
     fdf_reader(data, argv[1]);
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1280, 720, "FRCTL");

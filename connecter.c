@@ -6,9 +6,19 @@
 
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
-   *x = *x + cos(data->angle_x) - *y * sin(data->angle_y);
-   *y = *x * sin(data->angle_x) + *y * cos(data->angle_y);
+    if(data->rotate == 'u' || data->rotate == 'd')
+    {
+        *y = *y * cos(data->angle) + z * sin(data->angle) + z;
+    }
+    else if(data->rotate == 'l' || data->rotate == 'r')
+    {
+        *x = *x * cos(data->angle) + z * sin(data->angle);
+        *y = *y + z;
+    }
+
+   (void)x;
    (void)z;
+   (void)y;
 }
 
 void mapper(t_data *data)

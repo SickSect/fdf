@@ -7,6 +7,8 @@
 #include "libft.h"
 #include "mlx.h"
 #include <stdio.h>
+#include <error.h>
+#include <string.h>
 
 typedef struct s_data
 {
@@ -19,6 +21,8 @@ typedef struct s_data
     int     zoom;
     int     mv_x;
     int     mv_y;
+    float   angle_x;
+    float   angle_y;
 }	t_data;
 
 void fdf_reader(t_data *data, char *file);

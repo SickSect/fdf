@@ -17,28 +17,22 @@ int press(int key, t_data *data)
         data->zoom -= 10;
     if (key == 119)
     {
-        
-        data->rotate = 'u';
-        data->angle += 0.1;
+        data->angle_y += 0.1;
     }  
     else if (key == 115)
     {
-        data->rotate = 'd';
-        data->angle -= 0.1;
-    }
-    else if (key == 97)
-    {
-         data->rotate = 'l';
-        data->angle -= 0.1;
+        data->angle_y -= 0.1;
     }
     else if (key == 100)
     {
-         data->rotate = 'r';
-        data->angle -= 0.1;
+        data->angle_x -= 0.1;
+    }
+    else if (key == 97)
+    { 
+        data->angle_x += 0.1;
     }
     mlx_clear_window(data->mlx, data->win);
     mapper(data);
-
     return (0);
 }
 
@@ -72,8 +66,8 @@ int main(int argc, char **argv)
     }
     t_data *data;
     data = malloc(sizeof(t_data));
-    data->rotate = 'n';
-    data->angle = 0.8;
+    data->angle_x = 0.1;
+    data->angle_y = 0.1;
     data->mv_x = 350;
     data->mv_y = 350;
     fdf_reader(data, argv[1]);

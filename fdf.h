@@ -21,8 +21,9 @@ typedef struct s_data
     int     zoom;
     int     mv_x;
     int     mv_y;
-    float   angle;
-    char    rotate;
+    float   angle_x;
+    float   angle_y;
+    float   angle_z;
 }	t_data;
 
 void fdf_reader(t_data *data, char *file);

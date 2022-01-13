@@ -6,16 +6,8 @@
 
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
-    if(data->rotate == 'u' || data->rotate == 'd')
-    {
-        *y = *y * cos(data->angle) + z * sin(data->angle) + z;
-    }
-    else if(data->rotate == 'l' || data->rotate == 'r')
-    {
-        *x = *x * cos(data->angle) + z * sin(data->angle);
-        *y = *y + z;
-    }
-
+   *x = *x * cos(data->angle_x);
+   *y = *y * cos(data->angle_y) + z;
    (void)x;
    (void)z;
    (void)y;

@@ -23,7 +23,7 @@ int press(int key, t_data *data)
     {
         data->angle_y -= 0.1;
     }
-    else if (key == 100)
+    else if (key == 100) 
     {
         data->angle_x -= 0.1;
     }

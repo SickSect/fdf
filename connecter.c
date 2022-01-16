@@ -69,7 +69,12 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
 
     while((int)(x - x1) || (int)(y - y1))
     {
-        
+        if (z < z1)
+        {
+            data->color = data->color >> 24;
+            data->color = data->color >> 16;
+            data->color = data->color >> 8;
+        }
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;

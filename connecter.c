@@ -4,25 +4,11 @@
 #define MX(x, y) (x > y ? x : y)
 #define MD(x) ((x > 0) ? x : -x)
 
-/*
-void make_color(t_data *data, float x, float y)
-{
-    
-    if (z1 > z)
-        data->color = data->color >> 1;
-    else if(z > z1)
-        data->color = data->color << 1;
-    else if (z1 == z && z > 0)
-        return ;
-    else
-        data->color = 0xffffff;
-    
-}
-*/
+
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
    *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
-   *y = *y * cos(data->angle_y) - *x * sin(data->angle_y) - (z * 10);
+   *y = *y * cos(data->angle_y) - *x * sin(data->angle_y) - z;
    (void)x;
    (void)z;
    (void)y;
@@ -63,21 +49,27 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     x1 *= data->zoom;
     y *= data->zoom;
     y1 *= data->zoom;
-    data->color = (z || z1) ? 0xffffff : 0x00ff0000; // k b
+
+    data->color = 0xaaaaaaaa; // (z || z1) ? 0xffffff : 0x00ff0000; // k - 16711680 b - 285212671 0xTTRRGGBB
+
     make_matrix(&x, &y, (float)z, data);
     make_matrix(&x1, &y1, (float) z1, data);
+
     x += data->mv_x;
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
     pix_x = x1 - x;
     pix_y = y1 - y;
+
     tmp = MX(MD(pix_x), MD(pix_y));
+
     pix_x /= tmp;
     pix_y /= tmp;
+
     while((int)(x - x1) || (int)(y - y1))
     {
-        //make_color(data, z, z1);
+        
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;

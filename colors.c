@@ -1,5 +1,10 @@
 #include "fdf.h"
 
+int get_amount(t_data *data)
+{
+	return ((256 - data->zoom) / data->zoom);
+}
+
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);

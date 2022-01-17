@@ -2,7 +2,8 @@
 
 int press(int key, t_data *data)
 {
-	printf("%d \n", key);
+
+	printf("%d \n", data->zoom);
     if(key == 65362)
         data->mv_y -= 10;
     if(key == 65364)

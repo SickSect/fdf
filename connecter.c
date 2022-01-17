@@ -48,7 +48,6 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     tmp = MX(MD(pix_x), MD(pix_y));
     pix_x /= tmp;
     pix_y /= tmp;
-
     while((int)(x - x1) || (int)(y - y1))
     {
         if (data->way > 0)
@@ -56,7 +55,7 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;
-        col -= 4;
+        col -= get_amount(data);
     }
 }
 

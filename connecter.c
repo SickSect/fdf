@@ -8,7 +8,7 @@
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
    *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
-   *y = *y * cos(data->angle_y) - *x * sin(data->angle_y) - z;
+   *y = *y * cos(data->angle_y) - *x * sin(data->angle_y) - (z * 5);
    (void)x;
    (void)z;
    (void)y;
@@ -35,11 +35,33 @@ void mapper(t_data *data)
     }
 }
 
-void connecter(float x, float y, float x1, float y1, t_data *data)
+void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
 {
     float pix_x;
     float pix_y;
     int tmp;
+    int col;
+    
+    col = 255;
+    pix_x = x1 - x;
+    pix_y = y1 - y;
+    tmp = MX(MD(pix_x), MD(pix_y));
+    pix_x /= tmp;
+    pix_y /= tmp;
+
+    while((int)(x - x1) || (int)(y - y1))
+    {
+        if (data->way > 0)
+            data->color = create_trgb(255,255,col,col);
+        mlx_pixel_put(data->mlx, data->win,x, y, data->color);
+        x += pix_x;
+        y += pix_y;
+        col -= 4;
+    }
+}
+
+void connecter(float x, float y, float x1, float y1, t_data *data)
+{
     int z;
     int z1;
 
@@ -49,34 +71,13 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     x1 *= data->zoom;
     y *= data->zoom;
     y1 *= data->zoom;
-
-    data->color = 0xaaaaaaaa; // (z || z1) ? 0xffffff : 0x00ff0000; // k - 16711680 b - 285212671 0xTTRRGGBB
-
+    data->color = create_trgb(255,255,255,255); // (z || z1) ? 0xffffff : 0x00ff0000; // k - 16711680 b - 285212671 0xTTRRGGBB
     make_matrix(&x, &y, (float)z, data);
     make_matrix(&x1, &y1, (float) z1, data);
-
     x += data->mv_x;
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
-    pix_x = x1 - x;
-    pix_y = y1 - y;
-
-    tmp = MX(MD(pix_x), MD(pix_y));
-
-    pix_x /= tmp;
-    pix_y /= tmp;
-
-    while((int)(x - x1) || (int)(y - y1))
-    {
-        if (z < z1)
-        {
-            data->color = data->color >> 24;
-            data->color = data->color >> 16;
-            data->color = data->color >> 8;
-        }
-        mlx_pixel_put(data->mlx, data->win,x, y, data->color);
-        x += pix_x;
-        y += pix_y;
-    }
+    data->way = z1 - z;
+    connecter_cycle(x, y, x1, y1, data);
 }

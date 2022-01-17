@@ -12,9 +12,9 @@ int press(int key, t_data *data)
     if(key == 65363)
         data->mv_x += 10;
     if (key == 61)
-        data->zoom += 10;
+        data->zoom += 5;
     if (key == 45 && data->zoom >= 20)
-        data->zoom -= 10;
+        data->zoom -= 5;
     if (key == 119)
     {
         data->angle_y += 0.1;

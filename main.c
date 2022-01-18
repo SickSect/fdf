@@ -2,6 +2,7 @@
 
 int press(int key, t_data *data)
 {
+    printf("you pressed - %d\n", key);
     if(key == 65362)
         data->mv_y -= 10;
     if(key == 65364)

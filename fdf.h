@@ -25,6 +25,8 @@ typedef struct s_data
     float   angle_y;
     int     way; // in what way should ba colored
     int     col; // 0 - 256 of each TRGB
+    int     huge_z; // variable to + z data
+    int     small_z; // variable to - z data
 
 }	t_data;
 

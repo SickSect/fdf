@@ -26,9 +26,15 @@ void mapper(t_data *data)
         while(x < data->width)
         {
             if (x < data->width - 1)
+			{
+				data->way = 0;
                 connecter(x, y, x + 1, y, data); // horiz
+			}
             if (y < data->heigth - 1)
+			{
+				data->way = 1;
                 connecter(x, y, x, y + 1, data); // vertical
+			}
             x++;
         }
         y++;
@@ -40,9 +46,11 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     float pix_x;
     float pix_y;
     int tmp;
-    int col;
     
-    col = 255;
+	if (data->way == 6 || data->way == 5)
+		data->col = 10;
+	else
+		data->col = 255;
     pix_x = x1 - x;
     pix_y = y1 - y;
     tmp = MX(MD(pix_x), MD(pix_y));
@@ -50,7 +58,7 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     pix_y /= tmp;
     while((int)(x - x1) || (int)(y - y1))
     {
-       
+		color_change(data);
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;
@@ -75,9 +83,13 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
-    if (z1 > z || z > z1)
-        data->way = 1;
-    else if (z1 == z && z > 0)
-        data->way = 2;
+    if (z1 == z && z > 0)
+        data->way += 3;
+	else if (z1 > z)
+        data->way += 1;
+	else if (z > z1)
+		data->way += 5;
+    else
+        data->way = 0;
     connecter_cycle(x, y, x1, y1, data);
 }

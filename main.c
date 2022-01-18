@@ -2,8 +2,6 @@
 
 int press(int key, t_data *data)
 {
-
-	printf("%d \n", data->zoom);
     if(key == 65362)
         data->mv_y -= 10;
     if(key == 65364)
@@ -17,21 +15,13 @@ int press(int key, t_data *data)
     if (key == 45 && data->zoom >= 20)
         data->zoom -= 5;
     if (key == 119)
-    {
         data->angle_y += 0.1;
-    }  
     else if (key == 115)
-    {
         data->angle_y -= 0.1;
-    }
     else if (key == 100) 
-    {
         data->angle_x -= 0.1;
-    }
     else if (key == 97)
-    { 
         data->angle_x += 0.1;
-    }
     mlx_clear_window(data->mlx, data->win);
     mapper(data);
     return (0);

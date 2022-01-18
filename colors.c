@@ -2,7 +2,7 @@
 
 int get_amount(t_data *data)
 {
-	return ((256 - data->zoom) / data->zoom);
+	return ((256 - data->zoom) / 40);
 }
 
 int	create_trgb(int t, int r, int g, int b)

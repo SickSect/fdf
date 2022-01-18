@@ -50,12 +50,10 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     pix_y /= tmp;
     while((int)(x - x1) || (int)(y - y1))
     {
-        if (data->way > 0)
-            data->color = create_trgb(255,255,col,col);
+       
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;
-        col -= get_amount(data);
     }
 }
 
@@ -72,11 +70,14 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     y1 *= data->zoom;
     data->color = create_trgb(255,255,255,255); // (z || z1) ? 0xffffff : 0x00ff0000; // k - 16711680 b - 285212671 0xTTRRGGBB
     make_matrix(&x, &y, (float)z, data);
-    make_matrix(&x1, &y1, (float) z1, data);
+    make_matrix(&x1, &y1, (float) z1, data);\
     x += data->mv_x;
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
-    data->way = z1 - z;
+    if (z1 > z || z > z1)
+        data->way = 1;
+    else if (z1 == z && z > 0)
+        data->way = 2;
     connecter_cycle(x, y, x1, y1, data);
 }

@@ -2,27 +2,20 @@
 
 int press(int key, t_data *data)
 {
-    printf("you pressed - %d\n", key);
-    if(key == 65362)
-        data->mv_y -= 10;
-    if(key == 65364)
-        data->mv_y += 10;
-    if(key == 65361)
-        data->mv_x -= 10;
-    if(key == 65363)
-        data->mv_x += 10;
-    if (key == 61)
-        data->zoom += 5;
-    if (key == 45 && data->zoom >= 20)
-        data->zoom -= 5;
-    if (key == 119)
-        data->angle_y += 0.1;
-    else if (key == 115)
-        data->angle_y -= 0.1;
-    else if (key == 100) 
-        data->angle_x -= 0.1;
-    else if (key == 97)
+    if ((key >= 65361 && key <= 65364) || key == 61 || key == 45)
+        mover(key, data);
+    else if (key == 119)
         data->angle_x += 0.1;
+    else if (key == 115)
+        data->angle_x -= 0.1;
+    else if (key == 100) 
+        data->angle_y -= 0.1;
+    else if (key == 97)
+        data->angle_y += 0.1;
+    else if (key == 122)
+        data->size_z += 1;
+    else if (key == 120 && data->size_z != 1)
+        data->size_z -= 1;
     mlx_clear_window(data->mlx, data->win);
     mapper(data);
     return (0);
@@ -31,7 +24,7 @@ int press(int key, t_data *data)
 int pre_check(char *file, int argc)
 {
     int fd;
-    if((fd = open(file, O_RDONLY)) == -1)
+    if((fd = open(file, O_RDWR)) == -1)
         return (-1);
     else if(argc > 2)
         return (-2);
@@ -39,11 +32,33 @@ int pre_check(char *file, int argc)
         return (0);
 }
 
+int set_default(char *filename)
+{
+    t_data *data;
+    data = malloc(sizeof(t_data));
+    if (!data)
+        return (-3);
+    data->angle_x = 0.1;
+    data->angle_y = 0.1;
+    data->mv_x = 350;
+    data->mv_y = 350;
+    data->size_z = 1;
+    fdf_reader(data, filename);
+    data->mlx = mlx_init();
+    data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
+    data->zoom = 40;
+    mapper(data);
+    mlx_hook(data->win, 2, 1L<<0, press, data);
+    mlx_loop(data->mlx);
+	free(data);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
     int er;
 
-    if((er = pre_check(argv[1], argc)) < 0)
+    if ((er = pre_check(argv[1], argc)) < 0)
     {
         if(er == -1)
         {
@@ -56,18 +71,11 @@ int main(int argc, char **argv)
             return (-1);
         }
     }
-    t_data *data;
-    data = malloc(sizeof(t_data));
-    data->angle_x = 0.1;
-    data->angle_y = 0.1;
-    data->mv_x = 350;
-    data->mv_y = 350;
-    fdf_reader(data, argv[1]);
-    data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, 1280, 720, "FRCTL");
-    data->zoom = 40;
-    mapper(data);
-    mlx_hook(data->win, 2, 1L<<0, press, data);
-    mlx_loop(data->mlx);
+	er = set_default(argv[1]);
+	if (er == -3)
+	{
+		ft_putstr_fd("Memory is full", 1);
+		return (-1);
+	}
     return (0);
 }

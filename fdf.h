@@ -25,9 +25,7 @@ typedef struct s_data
     float   angle_y;
     int     way; // in what way should ba colored
     int     col; // 0 - 256 of each TRGB
-    int     huge_z; // variable to + z data
-    int     small_z; // variable to - z data
-
+    int     size_z; // variable to + - z data
 }	t_data;
 
 void fdf_reader(t_data *data, char *file);
@@ -41,4 +39,5 @@ int get_r(int trgb);
 int get_g(int trgb);
 int get_b(int trgb);
 int	create_trgb(int t, int r, int g, int b);
+void mover(int key, t_data *data);
 #endif

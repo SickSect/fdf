@@ -7,11 +7,10 @@
 
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
-   *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
-   *y = *y * cos(data->angle_y) - *x * sin(data->angle_y) - (z * 5);
-   (void)x;
-   (void)z;
-   (void)y;
+	(void)z; // rechange it and make two branch
+    *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
+    *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
+    //*y = *y * cos(data->angle_x) + *x * sin(data->angle_x) - (z * data->size_z);
 }
 
 void mapper(t_data *data)
@@ -76,7 +75,7 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     x1 *= data->zoom;
     y *= data->zoom;
     y1 *= data->zoom;
-    data->color = create_trgb(255,255,255,255); // (z || z1) ? 0xffffff : 0x00ff0000; // k - 16711680 b - 285212671 0xTTRRGGBB
+    data->color = create_trgb(255,255,255,255); 
     make_matrix(&x, &y, (float)z, data);
     make_matrix(&x1, &y1, (float) z1, data);\
     x += data->mv_x;

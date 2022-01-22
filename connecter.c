@@ -8,7 +8,7 @@
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
     *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
-    *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
+    *y = *x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
     (void)z; // rechange it and make two branch
     //*y = *y * cos(data->angle_x) + *x * sin(data->angle_x) - (z * data->size_z);
 }

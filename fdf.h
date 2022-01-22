@@ -17,7 +17,7 @@ typedef struct s_data
     int		**matrix;
     void	*mlx;
     void	*win;
-    int     color; // main color
+    int     color; // white color
     int     zoom; //zome and moves
     int     mv_x;
     int     mv_y;
@@ -25,6 +25,7 @@ typedef struct s_data
     float   angle_y;
     int     way; // in what way should ba colored
     int     col; // 0 - 256 of each TRGB
+    int     last_color; // saving last col for make gradient
     int     size_z; // variable to + - z data
 }	t_data;
 
@@ -41,4 +42,8 @@ int get_b(int trgb);
 int	create_trgb(int t, int r, int g, int b);
 void mover(int key, t_data *data);
 int validate(char *filename);
+int	get_trgb(int trgb);
+int	get_r(int trgb);
+int	get_g(int trgb);
+int	get_b(int trgb);
 #endif

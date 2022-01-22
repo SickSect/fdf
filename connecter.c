@@ -9,8 +9,7 @@ void make_matrix(float *x, float *y, float z, t_data *data)
 {
     *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
     *y = *x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
-    (void)z; // rechange it and make two branch
-    //*y = *y * cos(data->angle_x) + *x * sin(data->angle_x) - (z * data->size_z);
+  
 }
 
 void mapper(t_data *data)
@@ -46,10 +45,6 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     float pix_y;
     int tmp;
     
-	if (data->way == 6 || data->way == 5)
-		data->col = 10;
-	else
-		data->col = 255;
     pix_x = x1 - x;
     pix_y = y1 - y;
     tmp = MX(MD(pix_x), MD(pix_y));
@@ -62,6 +57,7 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
         x += pix_x;
         y += pix_y;
     }
+    data->last_color = data->color;
 }
 
 void connecter(float x, float y, float x1, float y1, t_data *data)
@@ -75,13 +71,17 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     x1 *= data->zoom;
     y *= data->zoom;
     y1 *= data->zoom;
-    data->color = create_trgb(255,255,255,255); 
+    if (data->last_color >= 0)
+        data->color = data->last_color;
+    else
+        data->color = create_trgb(255,255,255,255); 
     make_matrix(&x, &y, (float)z, data);
     make_matrix(&x1, &y1, (float) z1, data);\
     x += data->mv_x;
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
+    // we have 1 or 0
     if (z1 == z && z > 0)
         data->way += 3;
 	else if (z1 > z)
@@ -89,6 +89,6 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
 	else if (z > z1)
 		data->way += 5;
     else
-        data->way = 0;
+        data->way = -1;
     connecter_cycle(x, y, x1, y1, data);
 }

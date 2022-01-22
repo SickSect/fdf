@@ -51,6 +51,8 @@ int set_default(char *filename)
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
     data->zoom = 40;
+    data->last_color = -1;
+    data->col = 255;
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
     mlx_loop(data->mlx);

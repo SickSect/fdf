@@ -70,6 +70,11 @@ int main(int argc, char **argv)
             ft_putstr_fd("More than 1 map", 1);
         return (-1);
     }
+    if (validate(argv[1]) != 0)
+    {
+        ft_putstr_fd("Map is not correct\n", 1);
+        return (-1);
+    }
 	er = set_default(argv[1]);
 	if (er == -3)
 	{

@@ -40,4 +40,5 @@ int get_g(int trgb);
 int get_b(int trgb);
 int	create_trgb(int t, int r, int g, int b);
 void mover(int key, t_data *data);
+int validate(char *filename);
 #endif

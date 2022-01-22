@@ -68,7 +68,7 @@ int fdf_reader(t_data *data, char *file)
 	while(i < data->heigth)
 	{
 		data->matrix[i++] = malloc(sizeof(int) * (data->width + 1));
-		if(!data->matrix[i])
+		if(!data->matrix[i - 1])
 			return (-3);
 	}
 	fd = open(file, O_RDONLY);

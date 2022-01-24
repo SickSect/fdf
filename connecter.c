@@ -50,7 +50,6 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     pix_y /= tmp;
     while((int)(x - x1) || (int)(y - y1))
     {
-        colorist(data);
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;
@@ -74,13 +73,5 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
-    if (z1 > z)
-        data->dep = 1;
-    else if (z1 < z)
-        data->dep = 2;
-    else if (z1 == z && z > 0)
-        data->dep = 3;
-    else if (z1 == 0 && z == 0)
-        data->dep = 4;
     connecter_cycle(x, y, x1, y1, data);
 }

@@ -19,6 +19,7 @@ typedef struct s_data
     void	*mlx;
     void	*win;
     int     color; // white color
+    int     last_color; // last pix color
     int     zoom; //zome and moves
     int     mv_x;
     int     mv_y;
@@ -46,4 +47,5 @@ int	get_trgb(int trgb);
 int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
+int color_alloc(t_data *data);
 #endif

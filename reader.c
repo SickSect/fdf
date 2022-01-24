@@ -50,7 +50,6 @@ void filler(int *data, char *line)
 		i++;
 	}
 	free(nums);
-
 }
 
 int fdf_reader(t_data *data, char *file)

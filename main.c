@@ -48,18 +48,11 @@ int set_default(char *filename)
     data->mv_y = 350;
     data->size_z = 1;
     er = fdf_reader(data, filename);
-    if(er == -3)
+    if (er == -3)
         return (-3);
-    data->color_matrix = (int**)malloc(sizeof(int*) * (data->heigth + 1));
-    if (!data->color_matrix)
+    er = color_alloc(t_data *data);
+    if (er == -3)
         return (-3);
-    while(i < data->heigth)
-    {
-        data->color_matrix[i++]=malloc(sizeof(int) * (data->width + 1));
-        if(!data->matrix[i - 1])
-            return (-3);
-    }
-    //create color matrix for saving color grade
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
     data->zoom = 40;

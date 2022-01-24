@@ -36,7 +36,9 @@ int set_default(char *filename)
 {
     t_data *data;
     int er;
+    int i;
 
+    i = 0;
     data = malloc(sizeof(t_data));
     if (!data)
         return (-3);
@@ -48,11 +50,20 @@ int set_default(char *filename)
     er = fdf_reader(data, filename);
     if(er == -3)
         return (-3);
+    data->color_matrix = (int**)malloc(sizeof(int*) * (data->heigth + 1));
+    if (!data->color_matrix)
+        return (-3);
+    while(i < data->heigth)
+    {
+        data->color_matrix[i++]=malloc(sizeof(int) * (data->width + 1));
+        if(!data->matrix[i - 1])
+            return (-3);
+    }
+    //create color matrix for saving color grade
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
     data->zoom = 40;
-    data->last_color = -1;
-    data->col = 255;
+    data->color = create_trgb (255, 255, 255, 255);
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
     mlx_loop(data->mlx);
@@ -72,6 +83,7 @@ int main(int argc, char **argv)
             ft_putstr_fd("More than 1 map", 1);
         return (-1);
     }
+    /*
     if ((er = validate(argv[1])) != 0)
     {
         if (er == 1)
@@ -80,6 +92,7 @@ int main(int argc, char **argv)
             ft_putstr_fd("Map is not correct\n", 1);
         return (-1);
     }
+    */
 	if ((er = set_default(argv[1])) != 0)
 	{
 		ft_putstr_fd("Memory is full", 1);

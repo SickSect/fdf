@@ -53,6 +53,7 @@ int set_default(char *filename)
     er = color_alloc(t_data *data);
     if (er == -3)
         return (-3);
+    set_color(data->matrix[0][0], data);
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
     data->zoom = 40;

@@ -13,25 +13,47 @@ int color_alloc(t_data *data)
 		data->color_matrix[i] = malloc(sizeof(int) * (data->width));
 		if (!data->color_matrix[i])
 			return (-3);
-		data->color_matrix[i] = -1;
+		i++;
 	}
 }
 
-void set_color(int x, int y, int z, int color)
+void set_color(int color, t_data *data)
 {
-	if (color == -1) // if no color
+	if (z == 0)
 	{
-		if (z == 0)
-			data->color_matrix[y][x] = create_trgb(255, 255, 255, 255);
-		else if (z > 0 && z < 255)
-			data->color_matrix[y][x] = create_trgb(255, 255, 255 - z, 255 - z);
-		else if (z > 255)
-			data->color_matrix[y][x] = create_trgb (255 ,255, 200, 200);
+		data->col = 255;
+		data->color_matrix[0][0] = create_trgb(255, 255, 255, 255);
 	}
-	else if (color == -2) // if have color
-		data->color_matrix[y][x] = color;
-	else if (color  != -1 && color != -2) // make last color
-		data->last_color = color;
+	else if (z > 0 && z < 255)
+	{	
+		data->col = 255 - z;
+		data->color_matrix[0][0] = create_trgb(255, 255, 255 - z, 255 - z);
+	}
+	else if (z > 255)
+	{
+		data->col = 100;
+		data->color_matrix[0][0] = create_trgb (255 ,255, 100, 100);
+	}
+}
+
+void change_color(t_data *data)
+{
+	if (data->way == 1)
+	{
+		data->color = create_trgb(255, 255, data->col, data->col);
+		if (data->col >= 2)
+			data->col -= 2;
+	}
+	else if (data->way == 2)
+	{
+		data->color = create_trgb(255, 255, data->col, data->col);
+		if (data->col <= 254)
+			data->col += 2;
+	}
+	else if (data->way == 3)
+	{
+		data->color = create_trgb(255, 255, 255, 255);
+	}
 }
 
 int	create_trgb(int t, int r, int g, int b)

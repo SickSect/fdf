@@ -15,6 +15,7 @@ void mapper(t_data *data)
 {
     int x;
     int y;
+    int tmp;
 
     y = 0;
     while(y < data->heigth)
@@ -22,13 +23,15 @@ void mapper(t_data *data)
         x = 0;
         while(x < data->width)
         {
-            data->dep = 0;
+            
             if (x < data->width - 1)
 			{
+                tmp = data->col;
                 connecter(x, y, x + 1, y, data); // horiz
 			}
             if (y < data->heigth - 1)
 			{
+                data->col = tmp;
                 connecter(x, y, x, y + 1, data); // vertical
 			}
             x++;
@@ -50,6 +53,7 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     pix_y /= tmp;
     while((int)(x - x1) || (int)(y - y1))
     {
+        change_color(data);
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;
@@ -73,5 +77,12 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
+    if (z < z1)
+        data->way = 1;
+    else if (z > z1)
+        data->way = 2;
+    else if (z1 = z && z = 0)
+        data->way = 3;
     connecter_cycle(x, y, x1, y1, data);
+    data->last_color = create_trgb(255, 255, data->col, data->col);
 }

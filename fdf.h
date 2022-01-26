@@ -20,6 +20,7 @@ typedef struct s_data
     void	*win;
     int     color; // white color
     int     last_color; // last pix color
+    int     way;
     int     zoom; //zome and moves
     int     mv_x;
     int     mv_y;

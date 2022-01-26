@@ -51,4 +51,6 @@ int	get_b(int trgb);
 int color_alloc(t_data *data);
 void set_color(int z, t_data *data);
 void change_color(t_data *data);
+int validate_format(char *filename);
+void map_cleaner(t_data *data);
 #endif

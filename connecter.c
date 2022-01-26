@@ -73,7 +73,6 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     z1 = data->matrix[(int)y1][(int)x1];
     data->color = data->color_matrix[(int)y][(int)x];
     data->col = get_g(data->color);
-
     x *= data->zoom;
     x1 *= data->zoom;
     y *= data->zoom;

@@ -32,6 +32,19 @@ int pre_check(char *file, int argc)
         return (0);
 }
 
+int main_pg(t_data *data)
+{
+    set_color(data->matrix[0][0], data);
+    data->mlx = mlx_init();
+    data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
+    mapper(data);
+    mlx_hook(data->win, 2, 1L<<0, press, data);
+    mlx_loop(data->mlx);
+    map_cleaner(data);
+	free(data);
+    return (0);
+}
+
 int set_default(char *filename)
 {
     t_data *data;
@@ -45,20 +58,14 @@ int set_default(char *filename)
     data->mv_x = 350;
     data->mv_y = 350;
     data->size_z = 1;
+    data->zoom = 40;
     er = fdf_reader(data, filename);
     if (er == -3)
         return (-3);
     er = color_alloc(data);
     if (er == -3)
         return (-3);
-    set_color(data->matrix[0][0], data);
-    data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
-    data->zoom = 40;
-    mapper(data);
-    mlx_hook(data->win, 2, 1L<<0, press, data);
-    mlx_loop(data->mlx);
-	free(data);
+    main_pg(data);
 	return (0);
 }
 
@@ -71,13 +78,20 @@ int main(int argc, char **argv)
         if(er == -1)
             ft_putstr_fd("No exist file\n", 1);
         else if(er == -2)
-            ft_putstr_fd("More than 1 map", 1);
+            ft_putstr_fd("More than 1 file\n", 1);
         return (-1);
     }
-    
+    if ((er = validate_format(argv[1])) < 0)
+    {
+        if (er == -1)
+            ft_putstr_fd("File does not have format\n", 1);
+        else if (er == -2)
+            ft_putstr_fd("Wrong files format\n", 1);
+        return (-1);
+    }
 	if ((er = set_default(argv[1])) != 0)
 	{
-		ft_putstr_fd("Memory is full", 1);
+		ft_putstr_fd("Memory is full\n", 1);
 		return (-1);
 	}
     return (0);

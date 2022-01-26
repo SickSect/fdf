@@ -19,25 +19,53 @@ int validate(char *filename)
 {
     int fd;
 	char *line;
-	int len_l;
-	int len_p;
+
 
 	fd = open (filename, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
-		return (1);
-	while(line != NULL)
+		return (-3);
+	while (line != NULL)
 	{
-		if (validate_sym(line) != 0)
-			return (-1);
-		len_p = width_counter(line, ' ');
+		validate_sym(line);
 		line = get_next_line(fd);
-		if (line != NULL)
-		{
-			len_l = width_counter(line, ' ');
-			if (len_p != len_l)
-				return (-1);
-		}
 	}
     return (0);
+}
+
+int validate_format(char *line)
+{
+	while (*line != '\0'  && *line != '.')
+		line++;
+	if (*line != '.')
+		return (-1);
+	line++;
+	if (*line == 'f')
+		line++;
+	else
+		return (-2);
+	if (*line == 'd')
+		line++;
+	else
+		return (-2);
+	if (*line == 'f')
+		line++;
+	else
+		return (-2);
+	return (0);
+}
+
+void map_cleaner(t_data *data)
+{
+	int i;
+
+	while (i < data->heigth)
+	{
+		free(data->matrix[i]);
+		free(data->color_matrix[i]);
+		i++;
+	}
+	free(data->matrix);
+	free(data->color_matrix);
+
 }

@@ -22,17 +22,14 @@ void set_color(int z, t_data *data)
 {
 	if (z == 0)
 	{
-		data->col = 255;
 		data->color_matrix[0][0] = create_trgb(255, 255, 255, 255);
 	}
 	else if (z > 0 && z < 255)
 	{	
-		data->col = 255 - z;
-		data->color_matrix[0][0] = create_trgb(255, 255, 255 - z, 255 - z);
+		data->color_matrix[0][0] = create_trgb(255, 255, 150, 150);
 	}
 	else if (z > 255)
 	{
-		data->col = 150;
 		data->color_matrix[0][0] = create_trgb (255 ,255, 150, 150);
 	}
 }
@@ -41,7 +38,9 @@ void change_color(t_data *data)
 {
 	if (data->way == 1)
 	{
-		data->color = create_trgb(255, 0, 255, 0);
+		data->color = create_trgb(255, 255, data->col, data->col);
+		if (data->col > 10)
+			data->col -= 5;
 	}
 	else if (data->way == 2)
 	{
@@ -49,11 +48,13 @@ void change_color(t_data *data)
 	}
 	else if (data->way == 3)
 	{
-		data->color = create_trgb(255, 0, 0, 255);
+		data->color = create_trgb(255, 255, data->col, data->col);
+		if (data->col < 255)
+			data->col += 5;
 	}
 	else if (data->way == 4)
 	{
-		data->color = create_trgb(255, 255, 0, 0);
+		data->color = create_trgb(255, 255, data->col, data->col);
 	}
 }
 

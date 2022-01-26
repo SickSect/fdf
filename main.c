@@ -36,9 +36,7 @@ int set_default(char *filename)
 {
     t_data *data;
     int er;
-    int i;
-
-    i = 0;
+    
     data = malloc(sizeof(t_data));
     if (!data)
         return (-3);
@@ -50,14 +48,13 @@ int set_default(char *filename)
     er = fdf_reader(data, filename);
     if (er == -3)
         return (-3);
-    er = color_alloc(t_data *data);
+    er = color_alloc(data);
     if (er == -3)
         return (-3);
     set_color(data->matrix[0][0], data);
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
     data->zoom = 40;
-    data->color = create_trgb (255, 255, 255, 255);
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
     mlx_loop(data->mlx);
@@ -77,16 +74,7 @@ int main(int argc, char **argv)
             ft_putstr_fd("More than 1 map", 1);
         return (-1);
     }
-    /*
-    if ((er = validate(argv[1])) != 0)
-    {
-        if (er == 1)
-            ft_putstr_fd("File is empty\n", 1);
-        else if (er == -1)
-            ft_putstr_fd("Map is not correct\n", 1);
-        return (-1);
-    }
-    */
+    
 	if ((er = set_default(argv[1])) != 0)
 	{
 		ft_putstr_fd("Memory is full", 1);

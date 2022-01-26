@@ -49,4 +49,6 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 int color_alloc(t_data *data);
+void set_color(int z, t_data *data);
+void change_color(t_data *data);
 #endif

@@ -64,9 +64,16 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
 {
     int z;
     int z1;
+    int ix;
+    int iy;
 
+    ix = (int)x1;
+    iy = (int)y1;
     z = data->matrix[(int)y][(int)x];
     z1 = data->matrix[(int)y1][(int)x1];
+    data->color = data->color_matrix[(int)y][(int)x];
+    data->col = get_g(data->color);
+
     x *= data->zoom;
     x1 *= data->zoom;
     y *= data->zoom;
@@ -77,12 +84,15 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     y += data->mv_y;
     x1 += data->mv_x;
     y1 += data->mv_y;
-    if (z < z1)
-        data->way = 1;
-    else if (z > z1)
+    
+    if (z1 > z)
+       data->way = 1;
+    else if (z == 0 && z1  == 0)
         data->way = 2;
-    else if (z1 = z && z = 0)
+    else if (z > z1)
         data->way = 3;
+    else if (z1 == z)
+        data->way = 4;
     connecter_cycle(x, y, x1, y1, data);
-    data->last_color = create_trgb(255, 255, data->col, data->col);
+    data->color_matrix[iy][ix] = data->color;
 }

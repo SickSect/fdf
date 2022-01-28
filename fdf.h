@@ -29,6 +29,7 @@ typedef struct s_data
     int     col; // 0 - 256 of each TRGB
     int     dep;
     int     size_z; // variable to + - z data
+    int     fin_map;
 }	t_data;
 
 int fdf_reader(t_data *data, char *file);
@@ -53,4 +54,9 @@ void set_color(int z, t_data *data);
 void change_color(t_data *data);
 int validate_format(char *filename);
 void map_cleaner(t_data *data);
+int find_way(int z, int z1);
+void add_move(float *x, float *y, float *x1, float *y1, t_data *data);
+void pre_setting(float *x, float *y, float *x1, float *y1, t_data *data);
+void pre_color(int x, int y, t_data *data);
+void make_matrix(float *x, float *y, float z, t_data *data);
 #endif

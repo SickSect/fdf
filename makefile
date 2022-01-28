@@ -12,7 +12,9 @@ INC			=	-I ./include -I ./libft -I ./mlx
 
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
-SRC			=	main.c reader.c connecter.c colors.c mover.c validator.c
+SRC			=	main.c reader.c connecter.c colors.c \
+				mover.c validator.c connecter_way.c \
+				basic_colors.c
 
 OBJ			=	$(SRC:.c=.o)
 

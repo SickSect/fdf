@@ -16,7 +16,6 @@ void mapper(t_data *data)
         x = 0;
         while(x < data->width)
         {
-            
             if (x < data->width - 1)
 			{
                 tmp = data->col;
@@ -31,7 +30,6 @@ void mapper(t_data *data)
         }
         y++;
     }
-    data->fin_map = 1;
 }
 
 void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
@@ -54,26 +52,6 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     }
 }
 
-void final_connector(float x, float y, float x1, float y1, t_data *data)
-{
-    float pix_x;
-    float pix_y;
-    int tmp;
-    
-    pix_x = x1 - x;
-    pix_y = y1 - y;
-    tmp = MX(MD(pix_x), MD(pix_y));
-    pix_x /= tmp;
-    pix_y /= tmp;
-     while((int)(x - x1) || (int)(y - y1))
-    {
-        change_color(data);
-        mlx_pixel_put(data->mlx, data->win,x, y, data->color);
-        x += pix_x;
-        y += pix_y;
-    }
-}
-
 void connecter(float x, float y, float x1, float y1, t_data *data)
 {
     int z;
@@ -85,19 +63,12 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     iy = (int)y1;
     z = data->matrix[(int)y][(int)x];
     z1 = data->matrix[(int)y1][(int)x1];
-    pre_color(x, y, data);
+    pre_color(data, x, y);
     pre_setting(&x, &y, &x1, &y1, data);
     make_matrix(&x, &y, (float)z, data);
     make_matrix(&x1, &y1, (float) z1, data);
     add_move(&x, &y, &x1, &y1, data);
-     if (data->fin_map == 0)
-     {
-        data->way = find_way(z, z1);
-        connecter_cycle(x, y, x1, y1, data);
-        data->color_matrix[iy][ix] = data->color;
-     }
-     else if (data->fin_map == 1)
-     {
-        data->way = find_way(z, z1);
-     } 
+    data->way = find_way(z, z1);
+    connecter_cycle(x, y, x1, y1, data);
+    data->color_matrix[iy][ix] = data->color;
 }

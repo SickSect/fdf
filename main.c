@@ -18,6 +18,7 @@ int press(int key, t_data *data)
         data->size_z -= 1;
     mlx_clear_window(data->mlx, data->win);
     mapper(data);
+    data->fin_map = 1;
     return (0);
 }
 
@@ -40,8 +41,6 @@ int main_pg(t_data *data)
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
     mlx_loop(data->mlx);
-    map_cleaner(data);
-	free(data);
     return (0);
 }
 
@@ -67,6 +66,8 @@ int set_default(char *filename)
     if (er == -3)
         return (-3);
     main_pg(data);
+    map_cleaner(data);
+	free(data);
 	return (0);
 }
 

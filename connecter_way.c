@@ -11,10 +11,10 @@ void pre_setting(float *x, float *y, float *x1, float *y1, t_data *data)
 
 void add_move(float *x, float *y, float *x1, float *y1, t_data *data)
 {
-    x += data->mv_x;
-    y += data->mv_y;
-    x1 += data->mv_x;
-    y1 += data->mv_y;
+    *x += data->mv_x;
+    *y += data->mv_y;
+    *x1 += data->mv_x;
+    *y1 += data->mv_y;
 }
 
 int find_way(int z, int z1)
@@ -32,8 +32,17 @@ int find_way(int z, int z1)
 
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
-    *x = *x * cos(data->angle_x) - *y * sin(data->angle_x);
-    *y = *x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
+    *x = *x * cos(data->angle_x) + *y * sin(data->angle_x);
+    if ((int)data->angle_y % 2 == 0)
+    {
+        z += *y * sin(data->angle_x) + z * cos(data->angle_y);
+        *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
+    }
+    else
+    {
+        z += *y * sin(data->angle_x) + z * cos(data->angle_y);
+        *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) + (z * data->size_z);
+    }
 }
 
 void pre_color(t_data *data, int x, int y)

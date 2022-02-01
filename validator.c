@@ -67,5 +67,4 @@ void map_cleaner(t_data *data)
 	}
 	free(data->matrix);
 	free(data->color_matrix);
-
 }

@@ -81,6 +81,7 @@ int fdf_reader(t_data *data, char *file)
 		i++;
 	}
 	data->matrix[i] = NULL;
+	free(line);
 	close(fd);
 	return (0);
 }

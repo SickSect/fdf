@@ -33,16 +33,10 @@ int find_way(int z, int z1)
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
     *x = *x * cos(data->angle_x) + *y * sin(data->angle_x);
-    if ((int)data->angle_y % 2 == 0)
-    {
-        z += *y * sin(data->angle_x) + z * cos(data->angle_y);
-        *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
-    }
-    else
-    {
-        z += *y * sin(data->angle_x) + z * cos(data->angle_y);
-        *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) + (z * data->size_z);
-    }
+    //MAKE TRIGGER ON Z BC IT DEPENDS ON Z
+    //z = *y * sin(data->angle_x) + z * cos(data->angle_y);
+    *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
+    //printf("Y = %f\n", *y);
 }
 
 void pre_color(t_data *data, int x, int y)

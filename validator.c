@@ -1,6 +1,18 @@
 #include "fdf.h"
 #include "libft.h"
 
+void exit_graph(t_data *data)
+{
+	map_cleaner(data);
+	if (data->win != NULL)
+		mlx_destroy_window(data->mlx,data->win);
+	if (data->mlx != NULL)
+		mlx_destroy_display(data->mlx);
+	if (data != NULL)
+		free(data);
+	exit (0);
+}
+
 int validate_sym(char *line)
 {
 	int i;
@@ -59,10 +71,15 @@ void map_cleaner(t_data *data)
 {
 	int i;
 
+	i = 0;
+	if (data == NULL)
+		return ;
 	while (i < data->heigth)
 	{
-		free(data->matrix[i]);
-		free(data->color_matrix[i]);
+		if (data->matrix[i] != NULL)
+			free(data->matrix[i]);
+		if (data->color_matrix[i] != NULL)
+			free(data->color_matrix[i]);
 		i++;
 	}
 	free(data->matrix);

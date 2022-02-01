@@ -2,7 +2,6 @@
 
 int press(int key, t_data *data)
 {
-    printf("%d\n", key);
     if ((key >= 65361 && key <= 65364) || key == 61 || key == 45)
         mover(key, data);
     else if (key == 119)
@@ -18,13 +17,7 @@ int press(int key, t_data *data)
     else if (key == 120 && data->size_z != 1)
         data->size_z -= 1;
     else if (key == 65307)
-    {
-        map_cleaner(data);
-        mlx_destroy_window(data->mlx, data->win);
-        mlx_destroy_display(data->mlx);
-        free(data);
-        return (0);
-    }
+        exit_graph(data);
     mlx_clear_window(data->mlx, data->win);
     mapper(data);
     data->fin_map = 1;
@@ -75,8 +68,6 @@ int set_default(char *filename)
     if (er == -3)
         return (-3);
     main_pg(data);
-    map_cleaner(data);
-	free(data);
 	return (0);
 }
 

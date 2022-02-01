@@ -59,4 +59,5 @@ void add_move(float *x, float *y, float *x1, float *y1, t_data *data);
 void pre_setting(float *x, float *y, float *x1, float *y1, t_data *data);
 void pre_color(t_data *data, int x, int y);
 void make_matrix(float *x, float *y, float z, t_data *data);
+void exit_graph(t_data *data);
 #endif

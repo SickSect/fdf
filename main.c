@@ -2,6 +2,7 @@
 
 int press(int key, t_data *data)
 {
+    printf("%d\n", key);
     if ((key >= 65361 && key <= 65364) || key == 61 || key == 45)
         mover(key, data);
     else if (key == 119)
@@ -39,7 +40,7 @@ int main_pg(t_data *data)
 {
     set_color(data->matrix[0][0], data);
     data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, 1280, 720, "FDF");
+    data->win = mlx_new_window(data->mlx, 1360, 1080, "FDF");
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
     mlx_loop(data->mlx);
@@ -61,12 +62,13 @@ int set_default(char *filename)
     data->size_z = 1;
     data->zoom = 40;
     data->fin_map = 0;
+    data->last_color = 0;
     er = fdf_reader(data, filename);
     if (er == -3)
-        return (-3);
+        return (-1);
     er = color_alloc(data);
     if (er == -3)
-        return (-3);
+        return (-1);
     main_pg(data);
 	return (0);
 }

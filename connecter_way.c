@@ -17,7 +17,7 @@ void add_move(float *x, float *y, float *x1, float *y1, t_data *data)
     *y1 += data->mv_y;
 }
 
-int find_way(int z, int z1)
+int find_way(float z, float z1)
 {
     if (z1 > z)
         return (1);
@@ -25,7 +25,7 @@ int find_way(int z, int z1)
         return (2);
     else if (z > z1)
         return (3);
-    else if (z1 == z)
+    else if (z1 == z && z1 > 0)
         return (4);
     return (0);
 }

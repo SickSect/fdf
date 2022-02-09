@@ -14,11 +14,11 @@ typedef struct s_data
 {
     int		width; 
     int		heigth;
-    int		**matrix;
+    float		**matrix;
     int     **color_matrix;
     void	*mlx;
     void	*win;
-    int     color; // white color
+    int     color;
     int     last_color; // last pix color
     int     way;
     int     zoom; //zome and moves
@@ -54,10 +54,12 @@ void set_color(int z, t_data *data);
 void change_color(t_data *data);
 int validate_format(char *filename);
 void map_cleaner(t_data *data);
-int find_way(int z, int z1);
+int find_way(float z, float z1);
 void add_move(float *x, float *y, float *x1, float *y1, t_data *data);
 void pre_setting(float *x, float *y, float *x1, float *y1, t_data *data);
 void pre_color(t_data *data, int x, int y);
 void make_matrix(float *x, float *y, float z, t_data *data);
 void exit_graph(t_data *data);
+float get_float(char *line);
+int check_dot(char *line);
 #endif

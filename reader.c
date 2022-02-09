@@ -36,7 +36,7 @@ int	get_heigth(char *file)
 	return (heigth - 1);
 }
 
-void filler(int *data, char *line)
+void filler(float *data, char *line)
 {
 	char **nums;
 	int		i;
@@ -45,8 +45,22 @@ void filler(int *data, char *line)
 	nums = ft_split(line, ' ');
 	while(nums[i])
 	{
+		if (check_dot(nums[i]) == 0)
+		{
+			data[i] = ft_atoi(nums[i]);
+			//printf("HERE - %f", data[i]);
+			free(nums[i]);
+		}
+		else
+		{
+			data[i] = get_float(nums[i]);
+			free(nums[i]);
+		}
+		/*
+		printf("check dot = %d\t", check_dot(nums[i]));
 		data[i] = ft_atoi(nums[i]);
 		free(nums[i]);
+		*/
 		i++;
 	}
 	free(nums);
@@ -60,13 +74,13 @@ int fdf_reader(t_data *data, char *file)
 
     data->width = get_width(file);
     data->heigth = get_heigth(file);
-	data->matrix = (int**)malloc(sizeof(int*) * (data->heigth + 1));
+	data->matrix = (float**)malloc(sizeof(float*) * (data->heigth + 1));
 	if (!data->matrix)
 		return (-3);
 	i = 0;
 	while(i < data->heigth)
 	{
-		data->matrix[i++] = malloc(sizeof(int) * (data->width + 1));
+		data->matrix[i++] = malloc(sizeof(float) * (data->width + 1));
 		if(!data->matrix[i - 1])
 			return (-3);
 	}

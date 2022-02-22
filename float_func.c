@@ -68,25 +68,25 @@ float get_dot_part(char *line)
         i++;
         pow--;
     }
-    printf("FLOAT HERE - %f\n", ret);
+    //printf("FLOAT HERE - %f\n", ret);
     while (ret > 1)
         ret *= 0.1;
-    printf("FLOAT HERE - %f\n", ret);
+    //printf("FLOAT HERE - %f\n", ret);
     return (ret);
 }
 
 float get_float(char *line)
 {
-    printf(" HERE line is - %s \n", line);
+    //printf(" HERE line is - %s \n", line);
     char **flt;
     int num;
     float dot_num;
 
     flt = ft_split(line, ','); // cut 12 | 0xf1231F
-    printf ("after split 1 - %s  2 - %s\n", flt[0], flt[1]);
+    //printf ("after split 1 - %s  2 - %s\n", flt[0], flt[1]);
     num = ft_atoi(flt[0]);
-    printf("INT IS %d\n", num);
+    //printf("INT IS %d\n", num);
     dot_num = num + get_dot_part(flt[1]);
-    printf("FLOAT FIN %f\n", dot_num);
+    //printf("FLOAT FIN %f\n", dot_num);
     return (dot_num);
 }

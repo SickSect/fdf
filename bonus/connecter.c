@@ -19,12 +19,12 @@ void mapper(t_data *data)
             if (x < data->width - 1)
 			{
                 tmp = data->col;
-                connecter(x, y, x + 1, y, data); // horiz
+                connecter(x, y, x + 1, y, data);
 			}
             if (y < data->heigth - 1)
 			{
                 data->col = tmp;
-                connecter(x, y, x, y + 1, data); // vertical
+                connecter(x, y, x, y + 1, data);
 			}
             x++;
         }
@@ -37,22 +37,18 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     float pix_x;
     float pix_y;
     int tmp;
-    int flg;
-    //printf("|x %f x1 %f|\n", x, x1);
-    flg = 0;
+    
     pix_x = x1 - x;
     pix_y = y1 - y;
     tmp = MX(MD(pix_x), MD(pix_y));
     pix_x /= tmp;
     pix_y /= tmp;
+    change_color(data);
     while((int)(x - x1) || (int)(y - y1))
     {
-        if (flg == 0)
-            change_color(data);
         mlx_pixel_put(data->mlx, data->win,x, y, data->color);
         x += pix_x;
         y += pix_y;
-        flg = 1;
     }
 }
 

@@ -70,6 +70,7 @@ int set_default(char *filename)
     if (er == -3)
         return (-1);
     main_pg(data);
+    map_cleaner(data);
 	return (0);
 }
 

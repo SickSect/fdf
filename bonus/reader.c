@@ -48,7 +48,6 @@ void filler(float *data, char *line)
 		if (check_dot(nums[i]) == 0)
 		{
 			data[i] = ft_atoi(nums[i]);
-			//printf("HERE - %f", data[i]);
 			free(nums[i]);
 		}
 		else
@@ -56,11 +55,6 @@ void filler(float *data, char *line)
 			data[i] = get_float(nums[i]);
 			free(nums[i]);
 		}
-		/*
-		printf("check dot = %d\t", check_dot(nums[i]));
-		data[i] = ft_atoi(nums[i]);
-		free(nums[i]);
-		*/
 		i++;
 	}
 	free(nums);

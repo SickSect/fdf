@@ -57,9 +57,6 @@ int set_default(char *filename)
     er = fdf_reader(data, filename);
     if (er == -3)
         return (-1);
-    er = color_alloc(data);
-    if (er == -3)
-        return (-1);
     main_pg(data);
 	return (0);
 }

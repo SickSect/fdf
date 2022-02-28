@@ -78,10 +78,7 @@ void map_cleaner(t_data *data)
 	{
 		if (data->matrix[i] != NULL)
 			free(data->matrix[i]);
-		if (data->color_matrix[i] != NULL)
-			free(data->color_matrix[i]);
 		i++;
 	}
 	free(data->matrix);
-	free(data->color_matrix);
 }

@@ -63,12 +63,10 @@ void connecter(float x, float y, float x1, float y1, t_data *data)
     iy = (int)y1;
     z = data->matrix[(int)y][(int)x];
     z1 = data->matrix[(int)y1][(int)x1];
-    pre_color(data, x, y);
     pre_setting(&x, &y, &x1, &y1, data);
     make_matrix(&x, &y, z, data);
     make_matrix(&x1, &y1, z1, data);
     add_move(&x, &y, &x1, &y1, data);
     data->way = find_way(z, z1);
     connecter_cycle(x, y, x1, y1, data);
-    data->color_matrix[iy][ix] = data->color;
 }

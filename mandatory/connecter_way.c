@@ -35,9 +35,3 @@ void make_matrix(float *x, float *y, float z, t_data *data)
     *x = *x * cos(data->angle_x) + *y * sin(data->angle_x);
     *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
 }
-
-void pre_color(t_data *data, int x, int y)
-{
-    data->color = data->color_matrix[(int)y][(int)x];
-    data->col = get_g(data->color);
-}

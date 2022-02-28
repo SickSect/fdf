@@ -15,11 +15,9 @@ typedef struct s_data
     int		width; 
     int		heigth;
     float		**matrix;
-    int     **color_matrix;
     void	*mlx;
     void	*win;
     int     color;
-    int     last_color; // last pix color
     int     way;
     int     zoom; //zome and moves
     int     mv_x;

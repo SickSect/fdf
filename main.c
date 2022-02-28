@@ -2,7 +2,7 @@
 
 int press(int key, t_data *data)
 {
-    //printf("%d\n", key);
+    printf("%d\n", key);
     if ((key >= 65361 && key <= 65364) || key == 61 || key == 45)
         mover(key, data);
     else if (key == 119)

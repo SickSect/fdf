@@ -14,7 +14,7 @@ typedef struct s_data
 {
     int		width; 
     int		heigth;
-    float		**matrix;
+    float	**matrix;
     void	*mlx;
     void	*win;
     int     color;

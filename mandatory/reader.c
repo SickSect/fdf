@@ -39,14 +39,15 @@ int get_width(char *file)
 	while(byte)
 	{
 		byte = read(fd, &reader, 1);
-		if(reader != ' ')
-			width++;
-		while(reader != ' ')
+		if(reader != ' ' && reader != '\n' && reader != '\0')
 		{
-			byte = read(fd, &reader, 1);
-			if(reader == '\n')
-				return (width);
+			width++;
+			//!!!!!!! reading
 		}
+		else if (reader == ' ')
+			byte = read(fd, &reader, 1);
+		else
+			byte = -1;
 	}
 	return (width);
 }

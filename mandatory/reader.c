@@ -1,55 +1,31 @@
 #include "fdf.h"
 
-char *join(char *before, char sym)
+
+void get_width(int fd, t_data *data)
 {
-	int i;
-	char *after;
-
-	i = 0;
-	if (!before)
-	{
-		before = malloc(sizeof(char) * 2);
-		before[1] = '\0';
-		before[0] = sym;
-		return (before);
-	}
-	if (!before)
-		return (NULL);
-	after = malloc(sizeof(char) * (ft_strlen(before) + 2));
-	while(before[i])
-	{
-		after[i] = before[i];
-		i++;
-	}
-
-	free(before);
-	return (after);
-}
-
-int get_width(char *file)
-{
-	int width;
-	int fd;
-	int byte;
+	int flg;
 	char reader;
 
-	fd = open(file, O_RDONLY);
-	byte = 1;
-	width = 0;
-	while(byte)
+	flg = 1;
+	while(flg != -1)
 	{
-		byte = read(fd, &reader, 1);
-		if(reader != ' ' && reader != '\n' && reader != '\0')
+		flg = read(fd, &reader, 1);
+		if(flg == 1 && reader != ' ' && reader != '\n' && reader != '\0')
 		{
-			width++;
-			//!!!!!!! reading
+			data->width += 1;
+			flg = 2;
 		}
-		else if (reader == ' ')
-			byte = read(fd, &reader, 1);
-		else
-			byte = -1;
+		if (reader == '\n' || reader == '\0')
+			flg = -1;
+		if (reader == ' ' && flg == 2)
+		{
+			flg = read(fd, &reader, 1);
+			if(flg == ' ')
+				flg = 2;
+			else
+				flg = 1;
+		}
 	}
-	return (width);
 }
 
 int fdf_reader(t_data *data, char *file)
@@ -59,9 +35,8 @@ int fdf_reader(t_data *data, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		exit_graph(data);
+	get_width(fd, data);
 	close(fd);
-	data->width = get_width(file);
-	printf("WIDTH %d\n", data->width);
 	exit_graph(data);
 	return (0);
 }

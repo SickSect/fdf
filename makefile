@@ -14,11 +14,13 @@ LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
 SRC			=	mandatory/main.c mandatory/reader.c mandatory/connecter.c mandatory/colors.c \
 				mandatory/mover.c mandatory/validator.c mandatory/connecter_way.c \
-				mandatory/basic_colors.c mandatory/float_func.c
+				mandatory/basic_colors.c mandatory/float_func.c mandatory/get_next_line.c \
+				mandatory/get_next_line_utils.c mandatory/width_counter.c
 
 SRC_BONUS	= 	bonus/main.c bonus/reader.c bonus/connecter.c bonus/colors.c \
 				bonus/mover.c bonus/validator.c bonus/connecter_way.c \
-				bonus/basic_colors.c bonus/float_func.c
+				bonus/basic_colors.c bonus/float_func.c bonus/get_next_line.c \
+				bonus/get_next_line_utils.c bonus/width_counter.c
 
 OBJ			=	$(SRC:.c=.o)
 

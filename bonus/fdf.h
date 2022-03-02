@@ -32,6 +32,11 @@ typedef struct s_data
     int     fin_map;
 }	t_data;
 
+int width_counter(char *line, char ch);
+char	*ft_strnew(size_t size);
+int	ft_newline(const char *str);
+char	*ft_astrjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
 int destroy_notify(int key, t_data *data);
 int fdf_reader(t_data *data, char *file);
 void connecter(float x, float y, float x1, float y1, t_data *data);

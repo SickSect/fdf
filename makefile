@@ -35,7 +35,7 @@ bonus:	fclean $(MLX) $(OBJ_BONUS)
 
 $(NAME):	$(OBJ)
 			@make -s -C libft
-			$(CC) $(FLAGS) -o $(NAME) $^ $(LIB)
+			$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $(OBJ) $(LIB)
 
 $(MLX):
 			@make -s -C mlx

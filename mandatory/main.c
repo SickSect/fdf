@@ -45,6 +45,12 @@ int set_default(char *filename)
     data = malloc(sizeof(t_data));
     if (!data)
         return (-3);
+    er = fdf_reader(data, filename);
+    if (er == -3)
+    {
+        free(data);
+        return(-3);
+    }
     data->angle= 0.5;
     data->mv_x = 350;
     data->mv_y = 350;
@@ -52,9 +58,6 @@ int set_default(char *filename)
     data->zoom = 40;
     data->fin_map = 0;
     data->last_color = 0;
-    er = fdf_reader(data, filename);
-    if (er == -3)
-        return (-1);
     main_pg(data);
 	return (0);
 }

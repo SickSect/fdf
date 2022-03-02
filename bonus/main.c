@@ -38,12 +38,19 @@ int pre_check(char *file, int argc)
 
 int main_pg(t_data *data)
 {
+    int y;
+
+    y = 0;
     set_color(data->matrix[0][0], data);
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1360, 1080, "FDF");
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
     mlx_hook(data->win, 17, 1L<<17, destroy_notify, data);
+    mlx_string_put(data->mlx, data->win, 10, y + 20,create_trgb(255, 255, 255, 255), "MOVE - arrows");
+    mlx_string_put(data->mlx, data->win, 10, y + 30,create_trgb(255, 255, 255, 255), "ZOOM - + / -");
+    mlx_string_put(data->mlx, data->win, 10, y + 40,create_trgb(255, 255, 255, 255), "MULTIPLY Z - z / x");
+    mlx_string_put(data->mlx, data->win, 10, y + 50,create_trgb(255, 255, 255, 255), "ROTATE- w/s/a/d");
     mlx_loop(data->mlx);
     return (0);
 }

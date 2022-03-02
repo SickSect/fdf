@@ -38,7 +38,7 @@ void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
     float pix_y;
     int tmp;
     int flg;
-    //printf("|x %f x1 %f|\n", x, x1);
+    
     flg = 0;
     pix_x = x1 - x;
     pix_y = y1 - y;

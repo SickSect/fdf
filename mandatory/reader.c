@@ -1,5 +1,5 @@
 #include "fdf.h"
-/*
+
 int get_width(char *file)
 {
 	int		fd;
@@ -56,19 +56,18 @@ void filler(float *data, char *line)
 			data[i] = get_float(nums[i]);
 			free(nums[i]);
 		}
+		/*
+		printf("check dot = %d\t", check_dot(nums[i]));
+		data[i] = ft_atoi(nums[i]);
+		free(nums[i]);
+		*/
 		i++;
 	}
 	free(nums);
 }
-*/
-void read_map(t_data *data, int fd, char **map, char *buf)
-{
-	
-}
 
 int fdf_reader(t_data *data, char *file)
 {
-	/*
 	int		fd;
 	char	*line;
 	int		i;
@@ -98,28 +97,5 @@ int fdf_reader(t_data *data, char *file)
 	data->matrix[i] = NULL;
 	free(line);
 	close(fd);
-	printf("W %d H %d", data->width, data->heigth);
 	return (0);
-	*/
-	int fd;
-	char *map;
-	char *buf;
-
-	fd = open(file, O_RDONLY);
-	if(fd <= 0)
-		return (-3);
-	map = ft_calloc(1, 1);
-	if(!map)
-	{
-		close(fd);
-		return (-3);
-	}
-	buf = malloc(sizeof(char) * (1024 + 1));
-	if(!buf)
-	{
-		free(map);
-		close(fd);
-		return (-3);
-	}
-	read_map(data, fd, &map, buf);
 }

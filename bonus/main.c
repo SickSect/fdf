@@ -43,6 +43,7 @@ int main_pg(t_data *data)
     data->win = mlx_new_window(data->mlx, 1360, 1080, "FDF");
     mapper(data);
     mlx_hook(data->win, 2, 1L<<0, press, data);
+    mlx_hook(data->win, 17, 1L<<17, destroy_notify, data);
     mlx_loop(data->mlx);
     return (0);
 }

@@ -39,17 +39,15 @@ void change_color(t_data *data)
 {
 	if (data->way == 1)
 	{
-		if (data->col > 4)
-		{
+		if (data->col >= 24)
 			data->col -= 24;	//12 - (data->zoom / 10) + 1;
-		}
 		data->color = create_trgb(255, 255, data->col, data->col);
 	}
 	else if (data->way == 2)
 		data->color = create_trgb(255, 255, 255, 255);
 	else if (data->way == 3)
 	{
-		if (data->col < 254) // 254!!
+		if (data->col <= 230) // 254!!
 			data->col += 24;	//12 - (data->zoom / 10) + 1;
 		data->color = create_trgb(255, 255, data->col, data->col);
 	}

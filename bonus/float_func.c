@@ -5,7 +5,6 @@
 
 int check_dot(char *line)
 {
-    //printf("FIND\n");
     int i;
 
     i = 0;

@@ -15,3 +15,10 @@ void mover(int key, t_data *data)
     else if (key == 45 && data->zoom >= 20)
         data->zoom -= 5;
 }
+
+int destroy_notify(int key, t_data *data)
+{
+    (void)key;
+    exit_graph(data);
+    return (0);
+}

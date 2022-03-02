@@ -30,6 +30,7 @@ int	get_heigth(char *file)
 		if(line == NULL)
 			cycle = 0;
 		heigth++;
+		free(line);
 	}
 	free(line);
 	close(fd);

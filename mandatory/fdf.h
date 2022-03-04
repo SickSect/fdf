@@ -42,7 +42,7 @@ int		width_counter(char *line, char ch);
 char	*ft_strnew(size_t size);
 int		ft_newline(const char *str);
 char	*ft_astrjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int len);
 int		destroy_notify(int key, t_data *data);
 int		fdf_reader(t_data *data, char *file);
 void	connecter(t_cord cords, t_data *data, int flg);

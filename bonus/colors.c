@@ -21,38 +21,46 @@ int color_alloc(t_data *data)
 void set_color(int z, t_data *data)
 {
 	if (z == 0)
-	{
 		data->color_matrix[0][0] = create_trgb(255, 255, 255, 255);
-	}
 	else if (z > 0 && z < 255)
-	{	
 		data->color_matrix[0][0] = create_trgb(255, 255, 150, 150);
-	}
 	else if (z > 255)
-	{
 		data->color_matrix[0][0] = create_trgb (255 ,255, 150, 150);
-	}
+	else if (z < 0)
+		data->color_matrix[0][0] = create_trgb(255, 150, 150, 255);
 }
 
-// Color counter count the maximum red pixels
 void change_color(t_data *data)
 {
 	if (data->way == 1)
 	{
 		if (data->col >= 24)
-			data->col -= 24;	//12 - (data->zoom / 10) + 1;
-		data->color = create_trgb(255, 255, data->col, data->col);
+			data->col -= 24;
+		data->color = create_trgb(255, 255, data->col, data->tol);
 	}
 	else if (data->way == 2)
 		data->color = create_trgb(255, 255, 255, 255);
 	else if (data->way == 3)
 	{
-		if (data->col <= 230) // 254!!
-			data->col += 24;	//12 - (data->zoom / 10) + 1;
-		data->color = create_trgb(255, 255, data->col, data->col);
+		if (data->col <= 230) 
+			data->col += 24;
+		data->color = create_trgb(255, 255, data->col, data->tol);
 	}
 	else if (data->way == 4)
-		data->color = create_trgb(255, 255, data->col, data->col);
-	
+		data->color = create_trgb(255, 255, data->col, data->tol);
+	else if (data->way == 5)
+	{
+		if (data->tol <= 24)
+			data->tol -= 24;
+		data->color = create_trgb(255, 255, data->col, data->tol);
+	}
+	else if (data->way == 6)
+		data->color = create_trgb(255, 255, data->col, data->tol);
+	else if (data->way == 7)
+	{
+		if (data->tol <= 230)
+			data->tol += 24;
+		data->color = create_trgb(255, 255, data->col, data->tol);
+	}
 }
 

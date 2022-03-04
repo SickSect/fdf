@@ -68,7 +68,7 @@ int set_default(char *filename)
     data->mv_x = 350;
     data->mv_y = 350;
     data->size_z = 1;
-    data->zoom = 40;
+    data->zoom = 2;
     data->fin_map = 0;
     data->last_color = 0;
     er = fdf_reader(data, filename);

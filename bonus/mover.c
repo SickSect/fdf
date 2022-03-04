@@ -10,10 +10,10 @@ void mover(int key, t_data *data)
         data->mv_x -= 10;
     else if(key == 65363)
         data->mv_x += 10;
-    else if (key == 61 && data->zoom <= 120)
-        data->zoom += 5;
-    else if (key == 45 && data->zoom >= 20)
-        data->zoom -= 5;
+    else if (key == 61 && data->zoom <= 150)
+        data->zoom += 0.1;
+    else if (key == 45 && data->zoom >= 1)
+        data->zoom -= 0.1;
 }
 
 int destroy_notify(int key, t_data *data)

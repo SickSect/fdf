@@ -27,23 +27,6 @@ int validate_sym(char *line)
 	return (0);
 }
 
-int validate(char *filename)
-{
-    int fd;
-	char *line;
-
-
-	fd = open (filename, O_RDONLY);
-	line = get_next_line(fd);
-	if (line == NULL)
-		return (-3);
-	while (line != NULL)
-	{
-		validate_sym(line);
-		line = get_next_line(fd);
-	}
-    return (0);
-}
 
 int validate_format(char *line)
 {

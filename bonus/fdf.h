@@ -29,21 +29,23 @@ typedef struct s_data
     int     color;
     int     last_color;
     int     way;
-    int     zoom;
+    float   zoom;
     int     mv_x;
     int     mv_y;
     float   angle_x;
     float   angle_y;
     int     col;
+    int     tol;
     int     size_z;
     int     fin_map;
 }	t_data;
 
+void cycler(t_cord cords, t_data *data);
 int width_counter(char *line, char ch);
 char	*ft_strnew(size_t size);
 int	ft_newline(const char *str);
 char	*ft_astrjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int len);
 int destroy_notify(int key, t_data *data);
 int fdf_reader(t_data *data, char *file);
 void connecter(t_cord cords, t_data *data, int flg);

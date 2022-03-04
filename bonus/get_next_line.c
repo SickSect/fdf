@@ -20,10 +20,9 @@ char	*ft_liner(char *str)
 	i = 0;
 	if (!str[i])
 		return (NULL);
-	while (str[i] != '\n' && (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == ' ') && str[i])
-	{
+	while (str[i] != '\n' && (ft_isalpha(str[i]) || ft_isdigit(str[i])
+			|| str[i] == ' ') && str[i])
 		i++;
-	}
 	line = malloc(sizeof(char) * (i));
 	if (!line)
 		return (NULL);
@@ -68,18 +67,18 @@ char	*ft_acut(char *str)
 	return (new_str);
 }
 
-char	*ft_reader(int fd, char *line)
+char	*ft_reader(int fd, char *line, int len)
 {
 	int		last;
 	char	*reader;
 
-	reader = malloc(sizeof(char) * 2);
+	reader = malloc(sizeof(char) * (len + 1));
 	if (!reader)
 		return (NULL);
 	last = 1;
 	while (last && !ft_newline(line))
 	{
-		last = read(fd, reader, 1);
+		last = read(fd, reader, len);
 		if (last < 0)
 		{
 			free(reader);
@@ -92,14 +91,14 @@ char	*ft_reader(int fd, char *line)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int len)
 {
 	char		*line;
 	static char	*str;
 
 	if (fd < 0)
 		return (NULL);
-	str = ft_reader(fd, str);
+	str = ft_reader(fd, str, len);
 	if (!str)
 		return (NULL);
 	line = ft_liner(str);

@@ -12,14 +12,14 @@ int	get_width(char *file)
 		ft_putstr_fd(strerror(errno), 0);
 		return (-1);
 	}
-	line = get_next_line(fd);
+	line = get_next_line(fd, 1);
 	width = width_counter(line, ' ');
 	free(line);
 	close(fd);
 	return (width);
 }
 
-int	get_heigth(char *file)
+int	get_heigth(char *file, int len)
 {
     char	*line;
     int		fd;
@@ -36,7 +36,7 @@ int	get_heigth(char *file)
 	}
     while (cycle)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, len);
 		if (line == NULL)
 			cycle = 0;
 		heigth++;
@@ -84,12 +84,12 @@ void	shorter(t_data *data, char *file)
 		return ;
 	}
 	i = 0;
-	line = get_next_line(fd);
+	line = get_next_line(fd, data->width);
 	while (line)
 	{
 		filler(data->matrix[i], line);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, data->width);
 		i++;
 	}
 	data->matrix[i] = NULL;
@@ -104,7 +104,7 @@ int	fdf_reader(t_data *data, char *file)
 	data->width = get_width(file);
 	if (data->width == -1)
 		return (-1);
-	data->heigth = get_heigth(file);
+	data->heigth = get_heigth(file, data->width);
 	if (data->heigth == -1)
 		return (-1);
 	data->matrix = (float **)malloc(sizeof(float *) * (data->heigth + 1));

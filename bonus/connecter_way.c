@@ -1,20 +1,20 @@
 #include "fdf.h"
 #include <math.h>
 
-void pre_setting(float *x, float *y, float *x1, float *y1, t_data *data)
+void pre_setting(t_cord *cords, t_data *data)
 {
-    *x *= data->zoom;
-    *x1 *= data->zoom;
-    *y *= data->zoom;
-    *y1 *= data->zoom;
+    cords->x *= data->zoom;
+    cords->x1 *= data->zoom;
+    cords->y *= data->zoom;
+    cords->y1 *= data->zoom;
 }
 
-void add_move(float *x, float *y, float *x1, float *y1, t_data *data)
+void add_move(t_cord *cords, t_data *data)
 {
-    *x += data->mv_x;
-    *y += data->mv_y;
-    *x1 += data->mv_x;
-    *y1 += data->mv_y;
+    cords->x += data->mv_x;
+    cords->y += data->mv_y;
+    cords->x1 += data->mv_x;
+    cords->y1 += data->mv_y;
 }
 
 int find_way(float z, float z1)
@@ -36,7 +36,7 @@ void make_matrix(float *x, float *y, float z, t_data *data)
     *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
 }
 
-void pre_color(t_data *data, int x, int y)
+void pre_color(t_data *data, float x, float y)
 {
     data->color = data->color_matrix[(int)y][(int)x];
     data->col = get_g(data->color);

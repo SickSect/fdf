@@ -1,7 +1,7 @@
 #include "fdf.h"
 
 // Color counter count the maximum red pixels
-void change_color(t_data *data)
+void	change_color(t_data *data)
 {
 	if (data->way == 1)
 	{
@@ -15,6 +15,4 @@ void change_color(t_data *data)
 	}
 	else if (data->way == 4)
 		data->color = create_trgb(255, 255, 0, 0);
-	
 }
-

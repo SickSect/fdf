@@ -22,3 +22,17 @@ int destroy_notify(int key, t_data *data)
     exit_graph(data);
     return (0);
 }
+
+void	make_cord(t_cord *cords, int flg)
+{
+	if (flg == 1)
+	{
+		cords->x1 = cords->x + 1;
+		cords->y1 = cords->y;
+	}
+	else if (flg == 2)
+	{
+		cords->x1 = cords->x;
+		cords->y1 = cords->y + 1;
+	}
+}

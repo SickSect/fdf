@@ -1,72 +1,80 @@
 #include "fdf.h"
 
-#define MX(x, y) (x > y ? x : y)
-#define MD(x) ((x > 0) ? x : -x)
-
-
-void mapper(t_data *data)
+int	mx(int x, int y)
 {
-    int x;
-    int y;
-    int tmp;
-
-    y = 0;
-    while(y < data->heigth)
-    {
-        x = 0;
-        while(x < data->width)
-        {
-            if (x < data->width - 1)
-			{
-                tmp = data->col;
-                connecter(x, y, x + 1, y, data); // horiz
-			}
-            if (y < data->heigth - 1)
-			{
-                data->col = tmp;
-                connecter(x, y, x, y + 1, data); // vertical
-			}
-            x++;
-        }
-        y++;
-    }
+	if (x > y)
+		return (x);
+	else
+		return (y);
 }
 
-void connecter_cycle(float x, float y, float x1, float y1, t_data *data)
+int	md(int n)
 {
-    float pix_x;
-    float pix_y;
-    int tmp;
-    int flg;
-    
-    flg = 0;
-    pix_x = x1 - x;
-    pix_y = y1 - y;
-    tmp = MX(MD(pix_x), MD(pix_y));
-    pix_x /= tmp;
-    pix_y /= tmp;
-    while((int)(x - x1) || (int)(y - y1))
-    {
-        if (flg == 0)
-            change_color(data);
-        mlx_pixel_put(data->mlx, data->win,x, y, data->color);
-        x += pix_x;
-        y += pix_y;
-        flg = 1;
-    }
+	if (n < 0)
+		return (n * -1);
+	else
+		return (n);
 }
 
-void connecter(float x, float y, float x1, float y1, t_data *data)
+void	mapper(t_data *data)
 {
-    float z;
-    float z1;
+	t_cord	cords;
+	int		tmp;
 
-    z = data->matrix[(int)y][(int)x];
-    z1 = data->matrix[(int)y1][(int)x1];
-    pre_setting(&x, &y, &x1, &y1, data);
-    make_matrix(&x, &y, z, data);
-    make_matrix(&x1, &y1, z1, data);
-    add_move(&x, &y, &x1, &y1, data);
-    data->way = find_way(z, z1);
-    connecter_cycle(x, y, x1, y1, data);
+	cords.y = 0;
+	while (cords.y < data->heigth)
+	{
+		cords.x = 0;
+		while (cords.x < data->width)
+		{
+			if (cords.x < data->width - 1)
+			{
+				tmp = data->col;
+				connecter(cords, data, 1);
+			}
+			if (cords.y < data->heigth - 1)
+			{
+				data->col = tmp;
+				connecter(cords, data, 2);
+			}
+			cords.x++;
+		}
+		cords.y++;
+	}
+}
+
+void	connecter_cycle(t_cord cords, t_data *data)
+{
+	float	pix_x;
+	float	pix_y;
+	int		tmp;
+
+	pix_x = cords.x1 - cords.x;
+	pix_y = cords.y1 - cords.y;
+	tmp = mx(md(pix_x), md(pix_y));
+	pix_x /= tmp;
+	pix_y /= tmp;
+	while ((int)(cords.x - cords.x1) || (int)(cords.y - cords.y1))
+	{
+		change_color(data);
+		mlx_pixel_put(data->mlx, data->win, cords.x, cords.y, data->color);
+		cords.x += pix_x;
+		cords.y += pix_y;
+	}
+}
+
+void	connecter(t_cord cords, t_data *data, int flg)
+{
+	float	z;
+	float	z1;
+
+	make_cord(&cords, flg);
+	z = data->matrix[(int)cords.y][(int)cords.x];
+	z1 = data->matrix[(int)cords.y1][(int)cords.x1];
+	pre_setting(&cords, data);
+	make_matrix(&cords.x, &cords.y, z, data);
+	make_matrix(&cords.x1, &cords.y1, z1, data);
+	add_move(&cords, data);
+	data->way = find_way(z, z1);
+	connecter_cycle(cords, data);
 }

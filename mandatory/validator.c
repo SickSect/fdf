@@ -1,5 +1,7 @@
 # include "fdf.h"
 
+#define BASE_SYM "0123456789ABCDEFabcdef0x"
+
 void	exit_graph(t_data *data)
 {
 	map_cleaner(data);
@@ -10,21 +12,6 @@ void	exit_graph(t_data *data)
 	if (data != NULL)
 		free(data);
 	exit (0);
-}
-
-int	validate_sym(char *line)
-{
-	int	i;
-	int	length;
-
-	length = ft_strlen(line);
-	i = 0;
-	while (line[i] && ((line[i] == ' ' || line[i] == '-')
-			|| (line[i] >= '0' && line[i] <= '9')))
-		i++;
-	if (length != i + 1)
-		return (-1);
-	return (0);
 }
 
 int	validate_format(char *line)
@@ -63,4 +50,28 @@ void	map_cleaner(t_data *data)
 		i++;
 	}
 	free(data->matrix);
+}
+
+int	validate_map(char *line)
+{
+	int	i;
+	int	j;
+	int	er;
+
+	i = 0;
+	j = 0;
+	while(line[i])
+	{
+		j = 0;
+		while(j < 22)
+		{
+			if(line[i] == BASE_SYM[j])
+			{
+				er = 2;
+				j = 22;
+			}
+			j++;
+		}
+		i++;
+	}
 }

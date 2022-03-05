@@ -19,7 +19,7 @@ void	add_move(t_cord *cords, t_data *data)
 
 int	find_way(float z, float z1)
 {
-	if (z1 > z && z >= 0)
+	if (z1 > z && z > 0)
         return (1);
     else if (z == 0 && z1  == 0)
         return (2);
@@ -36,6 +36,9 @@ int	find_way(float z, float z1)
 
 void	make_matrix(float *x, float *y, float z, t_data *data)
 {
-	*x = *x * cos(data->angle) + *y * sin(data->angle);
-	*y = -*x * sin(data->angle) + *y * cos(data->angle) - (z * 10);
+	float iz;
+
+	iz = z * (data->zoom * 0.1); 
+	*x = *x * cos(data->angle) - *y * sin(data->angle);
+	*y = *x * sin(data->angle) + *y * cos(data->angle) - iz;
 }

@@ -19,7 +19,6 @@ int	md(int n)
 void	mapper(t_data *data)
 {
 	t_cord	cords;
-	int		tmp;
 
 	cords.y = 0;
 	while (cords.y < data->heigth)
@@ -28,15 +27,9 @@ void	mapper(t_data *data)
 		while (cords.x < data->width)
 		{
 			if (cords.x < data->width - 1)
-			{
-				tmp = data->col;
 				connecter(cords, data, 1);
-			}
 			if (cords.y < data->heigth - 1)
-			{
-				data->col = tmp;
 				connecter(cords, data, 2);
-			}
 			cords.x++;
 		}
 		cords.y++;

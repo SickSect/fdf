@@ -54,8 +54,11 @@ int find_way(float z, float z1)
 
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
+    float iz;
+
+	iz = z * (data->zoom * 0.1); 
     *x = *x * cos(data->angle_x) + *y * sin(data->angle_x);
-    *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - (z * data->size_z);
+    *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - iz;
 }
 
 void pre_color(t_data *data, float x, float y)

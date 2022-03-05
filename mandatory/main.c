@@ -4,15 +4,10 @@ int	press(int key, t_data *data)
 {
 	if ((key >= 65361 && key <= 65364) || key == 61 || key == 45)
 		mover(key, data);
-	else if (key == 122)
-		data->size_z += 1;
-	else if (key == 120 && data->size_z != 1)
-		data->size_z -= 1;
 	else if (key == 65307)
 		exit_graph(data);
 	mlx_clear_window(data->mlx, data->win);
 	mapper(data);
-	data->fin_map = 1;
 	return (0);
 }
 
@@ -59,10 +54,10 @@ int	set_default(char *filename)
 	if (!data)
 	{
 		ft_putstr_fd(strerror(errno), 0);
-		return (-3);
+		return (-1);
 	}
 	er = fdf_reader(data, filename);
-	if (er == -1)
+	if (er != 0)
 	{
 		free(data);
 		return (-1);
@@ -70,10 +65,7 @@ int	set_default(char *filename)
 	data->angle = 0.5;
 	data->mv_x = 350;
 	data->mv_y = 350;
-	data->size_z = 1;
-	data->zoom = 40;
-	data->fin_map = 0;
-	data->last_color = 0;
+	data->zoom = 20;
 	main_pg(data);
 	return (0);
 }

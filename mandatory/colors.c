@@ -1,6 +1,5 @@
 #include "fdf.h"
 
-// Color counter count the maximum red pixels
 void	change_color(t_data *data)
 {
 	if (data->way == 1)

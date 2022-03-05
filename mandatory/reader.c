@@ -115,7 +115,7 @@ int	fdf_reader(t_data *data, char *file)
 	{
 		data->matrix[i++] = malloc(sizeof(float) * (data->width + 1));
 		if (!data->matrix[i - 1])
-			return (-3);
+			return (-1);
 	}
 	shorter(data, file);
 	return (0);

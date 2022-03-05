@@ -1,6 +1,6 @@
 # include "fdf.h"
 
-#define BASE_SYM "0123456789ABCDEFabcdef0x"
+#define BASE_SYM "0123456789ABCDEFabcdef0x "
 
 void	exit_graph(t_data *data)
 {
@@ -45,33 +45,9 @@ void	map_cleaner(t_data *data)
 		return ;
 	while (i < data->heigth)
 	{
-		if (data->matrix[i] != NULL)
+		if (data->matrix[i])
 			free(data->matrix[i]);
 		i++;
 	}
 	free(data->matrix);
-}
-
-int	validate_map(char *line)
-{
-	int	i;
-	int	j;
-	int	er;
-
-	i = 0;
-	j = 0;
-	while(line[i])
-	{
-		j = 0;
-		while(j < 22)
-		{
-			if(line[i] == BASE_SYM[j])
-			{
-				er = 2;
-				j = 22;
-			}
-			j++;
-		}
-		i++;
-	}
 }

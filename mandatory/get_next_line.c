@@ -20,10 +20,9 @@ char	*ft_liner(char *str)
 	i = 0;
 	if (!str[i])
 		return (NULL);
-	while (str[i] != '\n' && (ft_isalpha(str[i]) || ft_isdigit(str[i])
-			|| str[i] == ' ') && str[i])
+	while (str[i] != '\n' && str[i])
 		i++;
-	line = malloc(sizeof(char) * (i));
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;

@@ -47,9 +47,9 @@ void	connecter_cycle(t_cord cords, t_data *data)
 	tmp = mx(md(pix_x), md(pix_y));
 	pix_x /= tmp;
 	pix_y /= tmp;
+	change_color(data);
 	while ((int)(cords.x - cords.x1) || (int)(cords.y - cords.y1))
 	{
-		change_color(data);
 		mlx_pixel_put(data->mlx, data->win, cords.x, cords.y, data->color);
 		cords.x += pix_x;
 		cords.y += pix_y;

@@ -67,10 +67,8 @@ float get_dot_part(char *line)
         i++;
         pow--;
     }
-    //printf("FLOAT HERE - %f\n", ret);
     while (ret > 1)
         ret *= 0.1;
-    //printf("FLOAT HERE - %f\n", ret);
     return (ret);
 }
 

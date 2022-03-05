@@ -16,15 +16,19 @@ int	pre_check(char *file, int argc)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 	{
 		ft_putstr_fd(strerror(errno), 0);
+		close(fd);
 		return (-1);
 	}
 	else if (argc > 2)
+	{
+		close(fd);
 		return (-2);
-	else
-		return (0);
+	}
+	close(fd);
+	return (0);
 }
 
 int	main_pg(t_data *data)
@@ -73,6 +77,7 @@ int	set_default(char *filename)
 int	main(int argc, char **argv)
 {
 	int	er;
+
 	er = pre_check(argv[1], argc);
 	if (er < 0)
 		return (-1);

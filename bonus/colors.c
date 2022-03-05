@@ -32,35 +32,6 @@ void set_color(int z, t_data *data)
 
 void change_color(t_data *data)
 {
-	if (data->way == 1)
-	{
-		if (data->col >= 24)
-			data->col -= 24;
-		data->color = create_trgb(255, 255, data->col, data->tol);
-	}
-	else if (data->way == 2)
-		data->color = create_trgb(255, 255, 255, 255);
-	else if (data->way == 3)
-	{
-		if (data->col <= 230) 
-			data->col += 24;
-		data->color = create_trgb(255, 255, data->col, data->tol);
-	}
-	else if (data->way == 4)
-		data->color = create_trgb(255, 255, data->col, data->tol);
-	else if (data->way == 5)
-	{
-		if (data->tol <= 24)
-			data->tol -= 24;
-		data->color = create_trgb(255, 255, data->col, data->tol);
-	}
-	else if (data->way == 6)
-		data->color = create_trgb(255, 255, data->col, data->tol);
-	else if (data->way == 7)
-	{
-		if (data->tol <= 230)
-			data->tol += 24;
-		data->color = create_trgb(255, 255, data->col, data->tol);
-	}
+	
 }
 

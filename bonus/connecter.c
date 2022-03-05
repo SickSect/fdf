@@ -44,7 +44,7 @@ void connecter_cycle(t_cord cords, t_data *data, int ix, int iy)
     tmp = mx(md(pix_x), md(pix_y));
     pix_x /= tmp;
     pix_y /= tmp;
-    if (data->fin_map == 0)
+    if (data->fin_map == 0 &&)
         change_color(data);
     else
         data->color = data->color_matrix[iy][ix];

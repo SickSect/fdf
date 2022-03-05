@@ -6,7 +6,6 @@
 # include <unistd.h>
 # include "libft.h"
 # include "mlx.h"
-# include <stdio.h>
 # include <errno.h>
 # include <string.h>
 
@@ -27,7 +26,6 @@ typedef struct s_data
     void	*mlx;
     void	*win;
     int     color;
-    int     last_color;
     int     way;
     float   zoom;
     int     mv_x;
@@ -36,7 +34,6 @@ typedef struct s_data
     float   angle_y;
     int     col;
     int     tol;
-    int     size_z;
     int     fin_map;
 }	t_data;
 

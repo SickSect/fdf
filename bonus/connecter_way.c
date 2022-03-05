@@ -35,20 +35,25 @@ void add_move(t_cord *cords, t_data *data)
 
 int find_way(float z, float z1)
 {
-    if (z1 > z && z >= 0)
-        return (1);
-    else if (z == 0 && z1  == 0)
-        return (2);
-    else if (z > z1 && z >= 0)
-        return (3);
-    else if (z1 == z && z1 > 0)
-        return (4);
-    else if (z1 < z && z <= 0)
-		return (5);
-	else if (z1 == z && z < 0)
-		return (6);
-	else if (z > z1 && z < 0)
-		return (7);
+    if(z >= 0)
+    {
+        if (z > z1)
+        {
+
+        }
+        else if (z < z1)
+        {
+
+        }
+    }
+    else if (z < 0)
+    {
+        if(z < z1)
+        {
+
+        }
+        else if (z > z1)
+    }
     return (0);
 }
 

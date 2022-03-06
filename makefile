@@ -17,10 +17,10 @@ SRC			=	mandatory/main.c mandatory/reader.c mandatory/connecter.c mandatory/colo
 				mandatory/basic_colors.c mandatory/float_func.c mandatory/get_next_line.c \
 				mandatory/get_next_line_utils.c mandatory/width_counter.c
 
-SRC_BONUS	= 	bonus/main.c bonus/reader.c bonus/connecter.c bonus/colors.c \
-				bonus/mover.c bonus/validator.c bonus/connecter_way.c \
-				bonus/basic_colors.c bonus/float_func.c bonus/get_next_line.c \
-				bonus/get_next_line_utils.c bonus/width_counter.c
+SRC_BONUS	= 	bonus/main_bonus.c bonus/reader_bonus.c bonus/connecter_bonus.c bonus/colors_bonus.c \
+				bonus/mover_bonus.c bonus/validator_bonus.c bonus/connecter_way_bonus.c \
+				bonus/basic_colors_bonus.c bonus/float_func_bonus.c bonus/get_next_line_bonus.c \
+				bonus/get_next_line_utils_bonus.c bonus/width_counter_bonus.c
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -30,12 +30,14 @@ RM		=	rm -rf
 
 all:	 $(MLX) $(NAME)
 
-bonus:	fclean $(MLX) $(OBJ_BONUS)
+bonus: $(MLX) $(OBJ_BONUS)
+	@rm -rf $(OBJ)
 	@make -s -C libft
 	$(CC) $(FLAGS) -fsanitize=address -o fdf $(OBJ_BONUS) $(LIB)
 
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) 
+			@rm -rf $(OBJ_BONUS)
 			@make -s -C libft
 			$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $(OBJ) $(LIB)
 

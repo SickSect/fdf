@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	get_width(char *file)
 {

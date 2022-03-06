@@ -1,5 +1,5 @@
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <stdlib.h>
 # include <fcntl.h>
@@ -32,7 +32,6 @@ typedef struct s_data
     float   angle_x;
     float   angle_y;
     int     col;
-    int     tol;
 }	t_data;
 
 void cycler(t_cord cords, t_data *data);
@@ -55,10 +54,6 @@ int get_b(int trgb);
 int	create_trgb(int t, int r, int g, int b);
 void mover(int key, t_data *data);
 int validate(char *filename);
-int	get_trgb(int trgb);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
 void set_color(int z, t_data *data);
 void change_color(t_data *data);
 int validate_format(char *filename);

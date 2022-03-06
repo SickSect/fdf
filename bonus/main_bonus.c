@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int press(int key, t_data *data)
 {
@@ -73,8 +73,6 @@ int set_default(char *filename)
     data->mv_x = 350;
     data->mv_y = 350;
     data->zoom = 10;
-    data->col = 0;
-    data->tol = 0;
     main_pg(data);
 	return (0);
 }
@@ -93,5 +91,4 @@ int main(int argc, char **argv)
 	if (er != 0)
 		return (-1);
 	return (0);
-    return (0);
 }

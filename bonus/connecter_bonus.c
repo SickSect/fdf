@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	mx(int x, int y)
 {
@@ -33,10 +33,8 @@ void mapper(t_data *data)
 	}
 }
 
-void connecter_cycle(t_cord cords, t_data *data, int ix, int iy)
+void connecter_cycle(t_cord cords, t_data *data)
 {
-    (void)ix;
-    (void)iy;
     float pix_x;
     float pix_y;
     int tmp;
@@ -58,12 +56,8 @@ void connecter(t_cord cords, t_data *data, int flg)
 { 
     float z;
     float z1;
-    int ix;
-    int iy;
 
     make_cord(&cords, flg);
-    ix = (int)cords.x1;
-    iy = (int)cords.y1;
     z = data->matrix[(int)cords.y][(int)cords.x];
     z1 = data->matrix[(int)cords.y1][(int)cords.x1];
     pre_setting(&cords, data);
@@ -72,5 +66,5 @@ void connecter(t_cord cords, t_data *data, int flg)
     add_move(&cords, data);
     data->way = find_way(z, z1);
     change_color(data);
-    connecter_cycle(cords, data, ix, iy);
+    connecter_cycle(cords, data);
 }

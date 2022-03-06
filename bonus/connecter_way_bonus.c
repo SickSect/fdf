@@ -1,18 +1,14 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <math.h>
 
 void cycler(t_cord cords, t_data *data)
-{
-	int	tmp;
-    
+{   
 	if (cords.x < data->width - 1)
 	{
-		tmp = data->col;
 		connecter(cords, data, 1);
 	}
 	if (cords.y < data->heigth - 1)
 	{
-		data->col = tmp;
 		connecter(cords, data, 2);
 	}
 }

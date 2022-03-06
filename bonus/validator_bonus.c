@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "libft.h"
 
 void exit_graph(t_data *data)

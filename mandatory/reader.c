@@ -28,13 +28,13 @@ int	get_heigth(char *file, int len)
 
 	cycle = 1;
 	heigth = 0;
-    fd = open(file, O_RDONLY, 0);
+	fd = open(file, O_RDONLY, 0);
 	if (fd < 0)
 	{
 		ft_putstr_fd(strerror(errno), 0);
 		return (-1);
 	}
-    while (cycle)
+	while (cycle)
 	{
 		line = get_next_line(fd, len);
 		if (line == NULL)
@@ -54,7 +54,7 @@ void	filler(float *data, char *line)
 
 	i = 0;
 	nums = ft_split(line, ' ');
-	while(nums[i])
+	while (nums[i])
 	{
 		if (check_dot(nums[i]) == 0)
 		{

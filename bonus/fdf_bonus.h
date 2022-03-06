@@ -15,11 +15,11 @@ typedef struct s_cord
     float	y;
 	float	x1;
 	float	y1;
-} t_cord;
+}	t_cord;
 
 typedef struct s_data
 {
-    int		width; 
+    int		width;
     int		heigth;
     float	**matrix;
     void	*mlx;
@@ -34,36 +34,30 @@ typedef struct s_data
     int     col;
 }	t_data;
 
-void cycler(t_cord cords, t_data *data);
-int width_counter(char *line, char ch);
+void	cycler(t_cord cords, t_data *data);
+int		width_counter(char *line, char ch);
 char	*ft_strnew(size_t size);
-int	ft_newline(const char *str);
+int		ft_newline(const char *str);
 char	*ft_astrjoin(char *s1, char *s2);
 char	*get_next_line(int fd, int len);
-int destroy_notify(int key, t_data *data);
-int fdf_reader(t_data *data, char *file);
-void connecter(t_cord cords, t_data *data, int flg);
-void mapper(t_data *data);
-int  keyer(int key, t_data *data);
-void colorist (t_data *datas);
-int get_amount(t_data *data);
-int get_trgb(int trgb);
-int get_r(int trgb);
-int get_g(int trgb);
-int get_b(int trgb);
-int	create_trgb(int t, int r, int g, int b);
-void mover(int key, t_data *data);
-int validate(char *filename);
-void set_color(int z, t_data *data);
-void change_color(t_data *data);
-int validate_format(char *filename);
-void map_cleaner(t_data *data);
-int find_way(float z, float z1);
-void add_move(t_cord *cords, t_data *data);
-void pre_setting(t_cord *cords, t_data *data);
-void make_matrix(float *x, float *y, float z, t_data *data);
-void exit_graph(t_data *data);
-float get_float(char *line);
-int check_dot(char *line);
-void make_cord(t_cord *cords, int flg);
+int		destroy_notify(int key, t_data *data);
+int		fdf_reader(t_data *data, char *file);
+void	connecter(t_cord cords, t_data *data, int flg);
+void	mapper(t_data *data);
+int		keyer(int key, t_data *data);
+int		get_amount(t_data *data);
+int		create_trgb(int t, int r, int g, int b);
+void	mover(int key, t_data *data);
+int		validate(char *filename);
+void	change_color(t_data *data);
+int		validate_format(char *filename);
+void	map_cleaner(t_data *data);
+int		find_way(float z, float z1);
+void	add_move(t_cord *cords, t_data *data);
+void	pre_setting(t_cord *cords, t_data *data);
+void	make_matrix(float *x, float *y, float z, t_data *data);
+void	exit_graph(t_data *data);
+float	get_float(char *line);
+int		check_dot(char *line);
+void	make_cord(t_cord *cords, int flg);
 #endif

@@ -1,7 +1,7 @@
 #include "fdf_bonus.h"
 #include <math.h>
 
-void cycler(t_cord cords, t_data *data)
+void	cycler(t_cord cords, t_data *data)
 {   
 	if (cords.x < data->width - 1)
 	{
@@ -13,7 +13,7 @@ void cycler(t_cord cords, t_data *data)
 	}
 }
 
-void pre_setting(t_cord *cords, t_data *data)
+void	pre_setting(t_cord *cords, t_data *data)
 {
     cords->x *= data->zoom;
     cords->x1 *= data->zoom;
@@ -21,7 +21,7 @@ void pre_setting(t_cord *cords, t_data *data)
     cords->y1 *= data->zoom;
 }
 
-void add_move(t_cord *cords, t_data *data)
+void	add_move(t_cord *cords, t_data *data)
 {
     cords->x += data->mv_x;
     cords->y += data->mv_y;
@@ -29,11 +29,11 @@ void add_move(t_cord *cords, t_data *data)
     cords->y1 += data->mv_y;
 }
 
-void make_matrix(float *x, float *y, float z, t_data *data)
+void	make_matrix(float *x, float *y, float z, t_data *data)
 {
-    float iz;
+    float	iz;
 
-	iz = z * (data->zoom * 0.1); 
+	iz = z * (data->zoom * 0.1);
     *x = *x * cos(data->angle_x) + *y * sin(data->angle_x);
     *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - iz;
 }

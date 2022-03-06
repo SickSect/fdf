@@ -3,9 +3,9 @@
 int	mx(int x, int y)
 {
     if (x > y)
-        return (x);
-    else
-        return (y);
+    	return (x);
+	else
+		return (y);
 }
 
 int	md(int n)
@@ -16,9 +16,9 @@ int	md(int n)
 		return (n);
 }
 
-void mapper(t_data *data)
+void	mapper(t_data *data)
 {
-    t_cord	cords;
+	t_cord	cords;
 
 	cords.y = 0;
 	while (cords.y < data->heigth)
@@ -33,38 +33,38 @@ void mapper(t_data *data)
 	}
 }
 
-void connecter_cycle(t_cord cords, t_data *data)
+void	connecter_cycle(t_cord cords, t_data *data)
 {
-    float pix_x;
-    float pix_y;
-    int tmp;
+	float	pix_x;
+	float	pix_y;
+	int		tmp;
 
-    pix_x = cords.x1 - cords.x;
-    pix_y = cords.y1 - cords.y;
-    tmp = mx(md(pix_x), md(pix_y));
-    pix_x /= tmp;
-    pix_y /= tmp;
-    while((int)(cords.x - cords.x1) || (int)(cords.y - cords.y1))
-    {
-        mlx_pixel_put(data->mlx, data->win,cords.x, cords.y, data->color);
-        cords.x += pix_x;
-        cords.y += pix_y;
-    }
+	pix_x = cords.x1 - cords.x;
+	pix_y = cords.y1 - cords.y;
+	tmp = mx(md(pix_x), md(pix_y));
+	pix_x /= tmp;
+	pix_y /= tmp;
+	while ((int)(cords.x - cords.x1) || (int)(cords.y - cords.y1))
+	{
+		mlx_pixel_put(data->mlx, data->win,cords.x, cords.y, data->color);
+		cords.x += pix_x;
+		cords.y += pix_y;
+	}
 }
 
-void connecter(t_cord cords, t_data *data, int flg)
+void	connecter(t_cord cords, t_data *data, int flg)
 { 
-    float z;
-    float z1;
+    float	z;
+    float	z1;
 
-    make_cord(&cords, flg);
-    z = data->matrix[(int)cords.y][(int)cords.x];
-    z1 = data->matrix[(int)cords.y1][(int)cords.x1];
-    pre_setting(&cords, data);
-    make_matrix(&cords.x, &cords.y, z, data);
-    make_matrix(&cords.x1, &cords.y1, z1, data);
-    add_move(&cords, data);
-    data->way = find_way(z, z1);
-    change_color(data);
-    connecter_cycle(cords, data);
+	make_cord(&cords, flg);
+	z = data->matrix[(int)cords.y][(int)cords.x];
+	z1 = data->matrix[(int)cords.y1][(int)cords.x1];
+	pre_setting(&cords, data);
+	make_matrix(&cords.x, &cords.y, z, data);
+	make_matrix(&cords.x1, &cords.y1, z1, data);
+	add_move(&cords, data);
+	data->way = find_way(z, z1);
+	change_color(data);
+	connecter_cycle(cords, data);
 }

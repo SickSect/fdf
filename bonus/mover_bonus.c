@@ -1,26 +1,26 @@
 #include "fdf_bonus.h"
 
-void mover(int key, t_data *data)
+void	mover(int key, t_data *data)
 {
-    if(key == 65362)
-        data->mv_y -= 10;
-    else if(key == 65364)
-        data->mv_y += 10;
-    else if(key == 65361)
-        data->mv_x -= 10;
-    else if(key == 65363)
-        data->mv_x += 10;
-    else if (key == 61 && data->zoom <= 300)
-        data->zoom += 0.1;
-    else if (key == 45 && data->zoom >= 0.1)
-        data->zoom -= 0.1;
+	if (key == 65362)
+		data->mv_y -= 10;
+	else if (key == 65364)
+		data->mv_y += 10;
+	else if (key == 65361)
+		data->mv_x -= 10;
+	else if (key == 65363)
+		data->mv_x += 10;
+	else if (key == 61 && data->zoom <= 300)
+		data->zoom += 0.1;
+	else if (key == 45 && data->zoom >= 0.1)
+		data->zoom -= 0.1;
 }
 
-int destroy_notify(int key, t_data *data)
+int	destroy_notify(int key, t_data *data)
 {
-    (void)key;
-    exit_graph(data);
-    return (0);
+	(void)key;
+	exit_graph(data);
+	return (0);
 }
 
 void	make_cord(t_cord *cords, int flg)

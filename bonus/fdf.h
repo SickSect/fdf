@@ -22,7 +22,6 @@ typedef struct s_data
     int		width; 
     int		heigth;
     float	**matrix;
-    int     **color_matrix;
     void	*mlx;
     void	*win;
     int     color;
@@ -34,7 +33,6 @@ typedef struct s_data
     float   angle_y;
     int     col;
     int     tol;
-    int     fin_map;
 }	t_data;
 
 void cycler(t_cord cords, t_data *data);
@@ -61,7 +59,6 @@ int	get_trgb(int trgb);
 int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
-int color_alloc(t_data *data);
 void set_color(int z, t_data *data);
 void change_color(t_data *data);
 int validate_format(char *filename);
@@ -69,7 +66,6 @@ void map_cleaner(t_data *data);
 int find_way(float z, float z1);
 void add_move(t_cord *cords, t_data *data);
 void pre_setting(t_cord *cords, t_data *data);
-void pre_color(t_data *data, float x, float y);
 void make_matrix(float *x, float *y, float z, t_data *data);
 void exit_graph(t_data *data);
 float get_float(char *line);

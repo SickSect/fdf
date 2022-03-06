@@ -4,7 +4,7 @@
 void cycler(t_cord cords, t_data *data)
 {
 	int	tmp;
-
+    
 	if (cords.x < data->width - 1)
 	{
 		tmp = data->col;
@@ -33,30 +33,6 @@ void add_move(t_cord *cords, t_data *data)
     cords->y1 += data->mv_y;
 }
 
-int find_way(float z, float z1)
-{
-    if(z >= 0)
-    {
-        if (z > z1)
-        {
-
-        }
-        else if (z < z1)
-        {
-
-        }
-    }
-    else if (z < 0)
-    {
-        if(z < z1)
-        {
-
-        }
-        else if (z > z1)
-    }
-    return (0);
-}
-
 void make_matrix(float *x, float *y, float z, t_data *data)
 {
     float iz;
@@ -64,14 +40,4 @@ void make_matrix(float *x, float *y, float z, t_data *data)
 	iz = z * (data->zoom * 0.1); 
     *x = *x * cos(data->angle_x) + *y * sin(data->angle_x);
     *y = -*x * sin(data->angle_y) + *y * cos(data->angle_y) - iz;
-}
-
-void pre_color(t_data *data, float x, float y)
-{
-    data->color = data->color_matrix[(int)y][(int)x];
-	if (data->fin_map == 0)
-	{
-    	data->col = get_g(data->color);
-		data->tol = get_b(data->color);
-	}
 }

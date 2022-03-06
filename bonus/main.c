@@ -16,7 +16,6 @@ int press(int key, t_data *data)
         exit_graph(data);
     mlx_clear_window(data->mlx, data->win);
     mapper(data);
-    data->fin_map = 1;
     return (0);
 }
 
@@ -45,7 +44,6 @@ int main_pg(t_data *data)
     int y;
 
     y = 0;
-    set_color(data->matrix[0][0], data);
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, 1360, 1080, "FDF");
     mapper(data);
@@ -68,15 +66,15 @@ int set_default(char *filename)
     if (!data)
         return (-3);
     er = fdf_reader(data, filename);
+    if (er != 0)
+        return (-3);
     data->angle_x = 0.1;
     data->angle_y = 0.4;
     data->mv_x = 350;
     data->mv_y = 350;
     data->zoom = 10;
-    data->fin_map = 0;
-    er = color_alloc(data);
-    if (er == -3)
-        return (-1);
+    data->col = 0;
+    data->tol = 0;
     main_pg(data);
 	return (0);
 }

@@ -35,6 +35,8 @@ void mapper(t_data *data)
 
 void connecter_cycle(t_cord cords, t_data *data, int ix, int iy)
 {
+    (void)ix;
+    (void)iy;
     float pix_x;
     float pix_y;
     int tmp;
@@ -44,10 +46,6 @@ void connecter_cycle(t_cord cords, t_data *data, int ix, int iy)
     tmp = mx(md(pix_x), md(pix_y));
     pix_x /= tmp;
     pix_y /= tmp;
-    if (data->fin_map == 0 &&)
-        change_color(data);
-    else
-        data->color = data->color_matrix[iy][ix];
     while((int)(cords.x - cords.x1) || (int)(cords.y - cords.y1))
     {
         mlx_pixel_put(data->mlx, data->win,cords.x, cords.y, data->color);
@@ -68,15 +66,11 @@ void connecter(t_cord cords, t_data *data, int flg)
     iy = (int)cords.y1;
     z = data->matrix[(int)cords.y][(int)cords.x];
     z1 = data->matrix[(int)cords.y1][(int)cords.x1];
-    if(data->fin_map == 0)
-        pre_color(data, cords.x, cords.y);
     pre_setting(&cords, data);
     make_matrix(&cords.x, &cords.y, z, data);
     make_matrix(&cords.x1, &cords.y1, z1, data);
     add_move(&cords, data);
-    if (data->fin_map == 0)
-        data->way = find_way(z, z1);
+    data->way = find_way(z, z1);
+    change_color(data);
     connecter_cycle(cords, data, ix, iy);
-    if (data->fin_map == 0)
-        data->color_matrix[iy][ix] = data->color;
 }

@@ -54,7 +54,7 @@ void	filler(float *data, char *line)
 
 	i = 0;
 	nums = ft_split(line, ' ');
-	while(nums[i])
+	while (nums[i])
 	{
 		if (check_dot(nums[i]) == 0)
 		{
